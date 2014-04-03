@@ -237,14 +237,14 @@ class EmacsLispSymbol(ObjectDescription):
                     line=self.lineno)
             else:
                 self.before_content()
-                auto_paragraph = corenodes.paragraph()
-                cont_node.insert(0, auto_paragraph)
-                lines = string2lines(docstring, tab_width=8,
-                                     convert_whitespace=True)
-                self.state.nested_parse(StringList(lines), self.content_offset,
-                                        auto_paragraph)
+                # We don't add the raw source to prevent Sphinx from trying to
+                # highlight this block.  Yes, that's hacky, but we've
+                # apparently no other chance to keep Pygments out of the party
+                docstring_block = corenodes.literal_block(
+                    '', docstring, classes=['el-docstring'])
+                cont_node.insert(0, docstring_block)
                 transformer = EmacsHelpModeMarkup(self.state.document,
-                                                  auto_paragraph)
+                                                  docstring_block)
                 transformer.apply()
                 self.after_content()
 

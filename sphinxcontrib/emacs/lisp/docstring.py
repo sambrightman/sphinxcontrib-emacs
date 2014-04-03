@@ -46,8 +46,7 @@ class EmacsHelpModeMarkup(Transform):
         (?:(?P<faceprefix>[Ff]ace\s+)`(?P<face>[^']+)') | # A face reference
         (?:(?P<symprefix>[Ss]ymbol\s+)`(?P<symbol>[^']+)') | # A literal symbol
         (?:(?P<urlprefix>URL\s+)`(?P<url>[^']+)') | # A URL reference
-        (?:`(?P<literal>[^']+)') | # A literal reference
-        (?:\b(?P<metavar>[A-Z][-_A-Z]{3,})\b) # A meta variable, as four or more uppercase letters
+        (?:`(?P<literal>[^']+)') # A literal reference
         """, re.MULTILINE | re.UNICODE | re.VERBOSE)
 
     #: Regular expression for a symbol.
@@ -56,20 +55,14 @@ class EmacsHelpModeMarkup(Transform):
     # http://definitelyaplug.b0.cx/post/emacs-reader/
     SYMBOL_PATTERN = re.compile(r'^[^\s"\';()[\]`,]+$', re.UNICODE)
 
-    #: A standalone meta variable
-    METAVAR_PATTERN = re.compile(r'\b([A-Z][-_A-Z]*)\b', re.UNICODE)
-
-    #: Literal node classes
-    LITERAL_NODE = (nodes.literal, nodes.FixedTextElement)
-
     def apply(self):
         root = self.startnode or self.document
-        for node in root.traverse(nodes.Text):
-            if isinstance(node.parent, self.LITERAL_NODE):
-                # Ignore inline and block literal text
+        for node in root.traverse(nodes.literal_block):
+            if 'el-docstring' not in node['classes']:
                 continue
-            new_nodes = self._transform_text(unicode(node))
-            node.parent.replace(node, new_nodes)
+            for text in node.traverse(nodes.Text):
+                new_nodes = self._transform_text(unicode(text))
+                text.parent.replace(text, new_nodes)
 
     def _transform_text(self, text):
         """Transform inline markup in ``text``.
@@ -165,20 +158,7 @@ class EmacsHelpModeMarkup(Transform):
 
     def _transform_literal(self, text, match):
         if self.SYMBOL_PATTERN.match(text):
-            return [self._to_reference('el:symbol', text)]
+            return self._to_reference('el:symbol', text)
         else:
-            node = nodes.literal(text, '')
-            position = 0
-            # Substitute meta variables in literal code
-            for match in self.METAVAR_PATTERN.iterfind(text):
-                if position < match.start():
-                    leading = text[position:match.start()]
-                    node += nodes.Text(leading, leading)
-                node += el_metavariable(match.group(0), match.group(0).lower())
-                position = match.end()
-            if position < len(text):
-                node += nodes.Text(text[position:], text[position:])
+            node = nodes.literal(text, text)
             return [node]
-
-    def _transform_metavar(self, value, _match):
-        return [el_metavariable(value, value.lower())]

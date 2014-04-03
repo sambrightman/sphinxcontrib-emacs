@@ -131,7 +131,8 @@ class EmacsLispDomain(Domain):
                 # drop the reference, and return just its contents.  To drop
                 # the reference, we also remove the corresponding classes from
                 # the content node.
-                content['classes'].remove('xref')
+                if 'xref' in content['classes']:
+                    content['classes'].remove('xref')
                 return content
             if len(candidate_scopes) > 1:
                 message = ('Ambiguous reference to {0}, '
