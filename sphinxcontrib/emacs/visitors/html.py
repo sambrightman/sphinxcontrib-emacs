@@ -27,6 +27,13 @@ Node visitors for HTML output.
 
 from sphinx import addnodes
 
+# Don't let Sphinx highlighting stuff get in our way for docstring blocks
+def visit_el_docstring_block(self, node):
+    self.body.append(self.starttag(
+        node, 'pre', suffix='', CLASS='el-docstring-block'))
+
+def depart_el_docstring_block(self, node):
+    self.body.append('</pre>\n')
 
 def visit_el_parameterlist(self, node):
     """Process a :class:`~sphinxcontrib.emacs.nodes.el_parameterlist`.

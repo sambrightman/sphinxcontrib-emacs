@@ -56,6 +56,13 @@ def setup(app):
     app.add_role('infonode', InfoNodeXRefRole())
     app.connect(str('missing-reference'), resolve_info_references)
     # Nodes
+    app.add_node(nodes.el_docstring_block,
+                 html=(visitors.html.visit_el_docstring_block,
+                       visitors.html.depart_el_docstring_block),
+                 latex=(visitors.latex.visit_el_docstring_block,
+                        visitors.latex.depart_el_docstring_block),
+                 texinfo=(visitors.texinfo.visit_el_docstring_block,
+                          visitors.texinfo.depart_el_docstring_block))
     app.add_node(nodes.el_parameterlist,
                  html=(visitors.html.visit_el_parameterlist,
                        visitors.noop),

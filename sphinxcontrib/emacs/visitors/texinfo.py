@@ -28,6 +28,14 @@ Node visitors for Texinfo output.
 from docutils import nodes
 
 
+def visit_el_docstring_block(self, node):
+    self.body.append('\n@format\n')
+
+
+def depart_el_docstring_block(self, node):
+    self.body.append('\n@end format\n')
+
+
 def visit_el_parameterlist(self, _node):
     """Process a :class:`~sphinxcontrib.emacs.nodes.el_parameterlist`."""
     self.body.append(' ')

@@ -21,44 +21,11 @@
 
 
 """
-Additional nodes of this extension.
+Node visitors for LaTeX output.
 """
 
+def visit_el_docstring_block(self, node):
+    self.body.append('\\begin{alltt}\n')
 
-from __future__ import unicode_literals
-
-from docutils import nodes
-from sphinx import addnodes
-
-
-# Node classes have a special nameing
-# pylint: disable=C0103
-
-
-class el_docstring_block(nodes.literal_block):
-    pass
-
-
-class el_parameterlist(addnodes.desc_parameterlist):
-    """A container node for the parameter list of a Emacs Lisp function."""
-    child_text_separator = ' '
-
-
-class el_annotation(addnodes.desc_annotation):
-    """A node for the type annotation of Emacs Lisp namespace."""
-    pass
-
-
-class el_parameter(addnodes.desc_parameter):
-    """A node for parameters of Emacs Lisp functions."""
-    pass
-
-
-class el_metavariable(nodes.emphasis):
-    """A node for a meta variable."""
-    pass
-
-
-class infonode_reference(nodes.reference):
-    """A reference node to cross-reference an Info manual node."""
-    pass
+def depart_el_docstring_block(self, node):
+    self.body.append('\n\\end{alltt}\n')

@@ -26,6 +26,7 @@ Visitor functions for nodes.
 
 from . import texinfo
 from . import html
+from . import latex
 
 
 def noop(self, node):           # pylint: disable=W0613

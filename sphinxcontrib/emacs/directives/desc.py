@@ -25,7 +25,6 @@
 
 from docutils import nodes as corenodes
 from docutils.parsers.rst import directives
-from docutils.statemachine import StringList, string2lines
 from sphinx import addnodes
 from sphinx.directives import ObjectDescription
 from sphinx.util.nodes import set_source_info
@@ -240,8 +239,7 @@ class EmacsLispSymbol(ObjectDescription):
                 # We don't add the raw source to prevent Sphinx from trying to
                 # highlight this block.  Yes, that's hacky, but we've
                 # apparently no other chance to keep Pygments out of the party
-                docstring_block = corenodes.literal_block(
-                    '', docstring, classes=['el-docstring'])
+                docstring_block = nodes.el_docstring_block(docstring, docstring)
                 cont_node.insert(0, docstring_block)
                 transformer = EmacsHelpModeMarkup(self.state.document,
                                                   docstring_block)

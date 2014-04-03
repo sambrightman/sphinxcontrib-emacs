@@ -29,7 +29,7 @@ from docutils import nodes
 from docutils.transforms import Transform
 from sphinx.addnodes import pending_xref
 
-from sphinxcontrib.emacs.nodes import el_metavariable
+from sphinxcontrib.emacs.nodes import el_docstring_block
 
 
 class EmacsHelpModeMarkup(Transform):
@@ -57,9 +57,7 @@ class EmacsHelpModeMarkup(Transform):
 
     def apply(self):
         root = self.startnode or self.document
-        for node in root.traverse(nodes.literal_block):
-            if 'el-docstring' not in node['classes']:
-                continue
+        for node in root.traverse(el_docstring_block):
             for text in node.traverse(nodes.Text):
                 new_nodes = self._transform_text(unicode(text))
                 text.parent.replace(text, new_nodes)
