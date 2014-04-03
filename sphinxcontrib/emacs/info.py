@@ -74,7 +74,7 @@ def resolve_info_references(app, _env, refnode, contnode):
         reference = infonode_reference('', '')
         reference['refnode'] = node
         reference['refmanual'] = manual
-        reference['has_explicit_title'] = refnode['has_explicit_title']
+        reference['has_explicit_title'] = refnode.get('has_explicit_title', False)
         reference.append(contnode)
         return reference
     else:
