@@ -3,3 +3,6 @@
 
 # Egg metadata
 *.egg-info/
+
+# Directory local variables
+.dir-locals.el
