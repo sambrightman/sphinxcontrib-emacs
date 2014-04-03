@@ -231,7 +231,9 @@ class AbstractInterpreter(object):
     def put(self, _context, _function, name, prop, value):
         """A call to ``put``.
 
-        Tries to set the symbol property as set by ``put``."""
+        Tries to set the symbol property as set by ``put``.
+
+        """
         if all(lisputil.is_quoted_symbol(s) for s in [name, prop]):
             symbol = self.env.intern(lisputil.unquote(name))
             prop = lisputil.unquote(prop).value()
@@ -276,7 +278,7 @@ class AbstractInterpreter(object):
             symbol.properties.update(lisputil.parse_custom_keywords(rest))
         symbol.properties['buffer-local'] = function.endswith('-local')
 
-    def defface(self, context, function, name, _face_def, docstring, *rest):
+    def defface(self, context, _function, name, _face_def, docstring, *rest):
         """A call to ``defface``.
 
         Parses the face documentation, and evaluates the custom keywords.
