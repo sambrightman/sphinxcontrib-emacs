@@ -27,11 +27,12 @@ import re
 
 from docutils import nodes
 
+from sphinxcontrib.emacs.util import normalize_space
 from sphinxcontrib.emacs.nodes import infonode_reference
 
 
 #: Regular expression object to parse the contents of an Info reference role.
-INFO_RE = re.compile(r'^\((?P<manual>.+)\)(?P<node>.+?)$')
+INFO_RE = re.compile(r'\A\((?P<manual>[^)]+)\)(?P<node>.+)\Z')
 
 
 #: Web URLs of Info manuals.
@@ -60,7 +61,7 @@ def resolve_info_references(app, _env, refnode, contnode):
     if refnode['reftype'] != 'infonode':
         return None
 
-    target = refnode['reftarget']
+    target = normalize_space(refnode['reftarget'])
     match = INFO_RE.match(target)
     if not match:
         app.env.warn(refnode.source, 'Invalid info target: {0}'.format(target),

@@ -23,6 +23,9 @@
 """Generic utilities."""
 
 
+import re
+
+
 def make_target(scope, name):
     """Create a target from ``scope`` and ``name``.
 
@@ -33,3 +36,8 @@ def make_target(scope, name):
 
     """
     return 'el.{0}.{1}'.format(scope, name)
+
+
+def normalize_space(s):
+    "Normalize whitespace in the given string."
+    return re.sub(r'\s+', ' ', s)
