@@ -40,6 +40,12 @@ from sphinxcontrib.emacs.lisp import AbstractInterpreter
 __version__ = '0.1'
 
 
+def register_interpreter_function(symbol, function):
+    """Register an interpreter ``function`` for ``symbol``."""
+    # FIXME: Quick 'n dirty, and definitely needs to be done properl
+    AbstractInterpreter.DEFAULT_FUNCTIONS[symbol] = function
+
+
 def setup(app):
     """Initialize this extension.
 
