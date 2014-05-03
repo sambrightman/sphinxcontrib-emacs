@@ -67,6 +67,11 @@ Documenting functions and macros
 
    Document ``symbol`` as function or macro with the given arglist, for example:
 
+   .. code-block:: cl
+
+      (defun hello (name &optional greeting)
+        (message "%s %s" (or greeting "Hello") name))
+
    .. code-block:: rst
 
       .. el:function:: hello name &optional greeting
@@ -99,6 +104,10 @@ Documenting variables, user options and hooks
                .. el:hook:: symbol
 
    Document ``symbol`` as Emacs Lisp variable, for example:
+
+   .. code-block:: cl
+
+      (defvar python-check-command "pylint")
 
    .. code-block:: rst
 
@@ -146,6 +155,10 @@ Documenting faces
 .. directive:: .. el:face:: symbol
 
    Document ``symbol`` as a face, for example:
+
+   .. code-block:: cl
+
+      (defface error '((t :foreground red)))
 
    .. code-block:: rst
 
