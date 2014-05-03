@@ -102,14 +102,14 @@ Documenting variables, user options and hooks
 
    .. code-block:: rst
 
-      .. el:variable:: foo
+      .. el:variable:: python-check-command
          :local:
          :safe: stringp
 
-         This variable does nothing particularly useful.
+         The shell command to use for checking the current buffer.
 
-   This documents ``foo`` as buffer-local variable which is safe as local
-   variable when its value matches the predicate ``stringp``.
+   This documents ``python-check-command`` as buffer-local variable which is
+   safe as local variable when its value matches the predicate ``stringp``.
 
    The flag ``:local:`` denotes that the variable is automatically buffer-local.
 
@@ -149,9 +149,9 @@ Documenting faces
 
    .. code-block:: rst
 
-      .. el:face:: foo
+      .. el:face:: error
 
-         The face for foos.
+         The face for errors.
 
 .. role:: el:face
 
@@ -160,4 +160,79 @@ Documenting faces
 Documenting CL structs
 ======================
 
-.. todo::
+.. directive:: .. el:cl-struct:: symbol
+
+   Document ``symbol`` as Cl struct defined by :code:`cl-defstruct`:
+
+   .. code-block:: cl
+
+      (cl-defstruct (person
+                     (:constructor person-new)
+                     (:constructor person-with-name name))
+        name mobile)
+
+   .. code-block:: rst
+
+      .. el:cl-struct:: person
+
+         A person.
+
+         .. el:cl-slot:: name
+
+            The name of a person
+
+         .. el:cl-slot:: mobile
+
+            The mobile phone number
+
+      .. el:defun:: person-new :name name :mobile mobile
+
+         Create a new person with the given ``name`` and ``mobile`` phone
+         number.
+
+      .. el:defun:: person-with-name name
+
+         Create a new person with the given ``name``.
+
+   Document constructors as standard functions with :dir:`el:function`.  For
+   slots, use the special :dir:`el:cl-slot` directive:
+
+   .. directive:: .. el:cl-slot:: slot
+
+      Documents ``slot`` as a slot of the current Cl struct.
+
+      .. warning::
+
+         Using this directive **outside** of a :dir:`el:cl-struct` block is an
+         error.
+
+      As Cl slots are functions in Emacs Lisp, this directive creates a function
+      reference to the slot.  Hence, the ``name`` slot from the above example
+      can be referenced either with :role:`el:slot` or with :role:`el:function`:
+
+      .. code-block:: rst
+
+         The slot :el:cl-slot:`~person name` holds the name of a person.
+
+         To get the name, call :el:function:`person-name`.
+
+      In this example, both references would point to the description of
+      ``name`` as in the example above.  The difference is merely in
+      presentation: While :role:`el:function` always shows the entire function
+      name, role:`el:cl-slot` only shows the name of the slot, if the reference
+      appears inside a :dir:`el:cl-struct` block, or if the role text starts
+      with a tilde.
+
+.. role:: el:cl-slot
+
+   Reference a slot of a Cl structure.
+
+   The text of the role has the form :samp:`{struct} {slot}` where ``struct`` is
+   the name of the structure containing the given ``slot``.  Inside of a
+   :dir:`el:cl-struct` block, ``struct`` may be omitted in which case it
+   defaults to the current structure.
+
+   When referencing a slot of the current structure inside a :dir:`el:cl-struct`
+   block, the name of the struct is omitted in the output.  To explicitly omit
+   the struct name, prefix the role text with ``~``, as in
+   :code:`:el:cl-slot:`~person name``.
