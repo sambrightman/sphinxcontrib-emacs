@@ -323,8 +323,6 @@ class AbstractInterpreter(object):
         ``**functions`` are additional functions for this interpreter.
 
         """
-        if not load_path:
-            raise ValueError('Empty load path!')
         self.functions = dict(self.DEFAULT_FUNCTIONS)
         self.functions.update(functions)
         self.env = env or AbstractEnvironment()
