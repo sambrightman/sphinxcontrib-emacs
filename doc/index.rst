@@ -35,6 +35,7 @@ User Guide
 .. toctree::
 
    guide/installation
+   guide/setup
    guide/domain
 
 License

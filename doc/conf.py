@@ -53,3 +53,9 @@ intersphinx_mapping = {'http://docs.python.org/': None,
                        'http://sphinx-doc.org': None}
 
 todo_include_todos = True
+
+
+def setup(app):
+    app.add_object_type('confval', 'confval',
+                        objname='configuration value',
+                        indextemplate='pair: %s; configuration value')
