@@ -27,6 +27,13 @@ The extension requires Sphinx 1.2 and Python 2.x.
 
    Python 3 is not supported currently!
 
+Documentation
+=============
+
+- `User guide`_
+
+.. _User guide: http://sphinxcontrib-emacs.readthedocs.org/en/latest/#user-guide
+
 Support and development
 =======================
 
