@@ -10,8 +10,8 @@ Emacs Lisp symbols.
 The Emacs Lisp domain
 =====================
 
-These directives live in the ``el`` domain.  See :ref:`domains` in the
-Sphinx documentation for more information on the concept of domains.
+These directives live in the ``el`` domain.  :ref:`domains` in the Sphinx
+documentation provides more information on the concept of domains.
 
 You can set this domain as default domain to use the directives and roles
 without their ``el:`` prefix, either globally, or per file.
