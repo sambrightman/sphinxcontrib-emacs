@@ -57,7 +57,23 @@ All directives support some common options:
 Scopes
 ======
 
-.. todo:: Explain scoping of description directives
+An Emacs Lisp symbol can be defined in different “scopes”:
+
+.. code-block:: cl
+
+   (defvar hello "Hello")
+
+   (defun hello (name)
+     (message "%s %s" hello name))
+
+This defines `hello` as variable *and* as function.  You can document these two
+definitions independently with the appropriate directives:
+
+.. code-block:: rst
+
+   .. el:defvar:: hello
+
+   .. el:function:: hello
 
 Documenting functions and macros
 ================================
