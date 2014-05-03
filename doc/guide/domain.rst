@@ -94,7 +94,94 @@ Documenting functions and macros
 Documenting interactive commands
 ================================
 
-.. todo:: Document ``el:command:``
+.. directive:: .. el:command:: symbol
+
+   Document ``symbol`` as interactive command:
+
+   .. code-block:: cl
+
+      (defun greet (name)
+        (interactive "%M")
+        (message "Hello %s" name))
+
+   .. code-block:: rst
+
+      .. el:command:: greet
+         :binding: C-c g
+
+         Prompt for a name and greet the user.
+
+   Commands are described as a user would type them in Emacs, via :kbd:`M-x`,
+   and optionally by specific bindings.  Hence, the above example would look
+   like this:
+
+   .. el:command:: greet
+      :binding: C-c g
+
+      Prompt for a name and greet the user.
+
+   ``prefix-arg`` adds the given prefix argument to the keybindings:
+
+   .. code-block:: rst
+
+      .. el:command:: greet
+         :binding: C-c g
+         :prefix-arg: C-u
+
+         Greet the current user.
+
+   .. el:command:: greet
+      :binding: C-c g
+      :prefix-arg: C-u
+      :noindex:
+
+      Greet the current user.
+
+.. role:: el:command
+
+   Reference an Emacs Lisp command.
+
+   Since commands are just functions, this directive is the same as
+   :role:`el:function`.
+
+Documenting different invocations of a command
+----------------------------------------------
+
+Emacs Lisp commands can be invoked in different ways, e.g. with or without
+prefix arguments, with different prefix arguments, or as ordinary function from
+Emacs Lisp.
+
+This extension encourages you to document all variants of a command
+*independently*:
+
+.. code-block:: rst
+
+   .. el:command:: greet
+      :binding: C-c g
+
+      Prompt for a name and greet the user.
+
+   .. el:command:: greet
+      :binding: C-c g
+      :prefix-arg: C-u
+      :noindex:
+
+   .. el:function:: greet name
+      :noindex:
+
+      Show a greeting message for the user with the given ``name``.
+
+This example documents three different variants of the Emacs Lisp command
+`greet`: Without prefix argument, with universal prefix argument, and as Emacs
+Lisp function.
+
+To avoid ambiguities in the index and when resolving cross-references, you must
+add the ``noindex`` option to all but the most “important” variant of the
+command.
+
+In the above example, we presume that :kbd:`C-c g` is the most important
+variant, so we add ``:noindex:`` to all others.  The index entry and
+cross-references with thus point to the :kbd:`C-c g` variant.
 
 Documenting variables, user options and hooks
 =============================================

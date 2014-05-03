@@ -18,6 +18,11 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+import os
+import sys
+
+sys.path.append(os.path.join(os.path.dirname(__file__), os.pardir))
+
 needs_sphinx = '1.2'
 
 extensions = [
@@ -25,6 +30,7 @@ extensions = [
     'sphinx.ext.intersphinx',
     'sphinx.ext.todo',
     'sphinx.ext.ifconfig',
+    'sphinxcontrib.emacs',
 ]
 
 default_role = 'code'
