@@ -4,5 +4,8 @@
 # Egg metadata
 *.egg-info/
 
+# distutils build files
+/build/
+
 # Directory local variables
 .dir-locals.el

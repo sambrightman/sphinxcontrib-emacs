@@ -2,24 +2,30 @@
  sphinxcontrib-emacs
 =====================
 
-Document Emacs projects with Sphinx_
+sphinxcontrib-emacs is a Sphinx_ extension to document Emacs_ code.
 
-Includes:
+.. _Sphinx: http://sphinx-doc.org
+.. _Emacs: http://www.gnu.org/software/emacs/
+
+Features
+========
 
 - Description directives for Emacs Lisp symbols
 - Autodoc for Emacs Lisp objects
-- Better Texinfo integration, including info manual references with HTML support
+- Better Texinfo integration to build online manuals for Emacs
 
 Installation
 ============
 
 ::
 
-   pip install git+https://github.com/flycheck/sphinxcontrib-emacs#egg=sphinxcontrib-emacs
+   pip install sphinxcontrib-emacs
 
 The extension requires Sphinx 1.2 and Python 2.x.
 
-.. warning:: Python 3 is not supported currently!
+.. warning::
+
+   Python 3 is not supported currently!
 
 Support and development
 =======================
@@ -35,5 +41,3 @@ License
 
 .. include:: LICENSE
    :literal:
-
-.. _Sphinx: http://sphinx-doc.org
