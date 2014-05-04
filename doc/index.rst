@@ -7,7 +7,6 @@ sphinxcontrib-emacs is a Sphinx_ extension to document Emacs_ code.
 .. _Sphinx: http://sphinx-doc.org
 .. _Emacs: http://www.gnu.org/software/emacs/
 
-
 Features
 ========
 
@@ -36,7 +35,6 @@ User Guide
    :maxdepth: 2
 
    guide/installation
-   guide/setup
    guide/domain
 
 License
