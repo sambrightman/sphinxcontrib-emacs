@@ -34,6 +34,7 @@ User Guide
 .. toctree::
    :maxdepth: 2
 
+   guide/intro
    guide/installation
    guide/domain
 
