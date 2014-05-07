@@ -4,17 +4,21 @@
 
 .. default-domain:: rst
 
-This extension provides directives and roles to document and cross-reference
-Emacs Lisp symbols.
+This page introduces the Emacs Lisp domain and its directives and roles to
+document and cross-reference Emacs Lisp symbols.
+
+Please read :ref:`domains` in the Sphinx documentation for more information on
+the concept of domains.
+
+.. _Tutorial: http://sphinx-doc.org/tutorial.html
 
 The Emacs Lisp domain
 =====================
 
-These directives live in the ``el`` domain.  :ref:`domains` in the Sphinx
-documentation provides more information on the concept of domains.
+These directives live in the ``el`` domain.
 
-You can set this domain as default domain to use the directives and roles
-without their ``el:`` prefix, either globally, or per file.
+You can set this domain as default domain to refer to the directives and roles
+without the ``el:`` prefix.
 
 To change the default domain globally, set the configuration value
 ``primary_domain`` in your :file:`conf.py` accordingly:
@@ -23,7 +27,7 @@ To change the default domain globally, set the configuration value
 
    primary_domain = 'el'
 
-To change the default domain per file, use the directive :dir:`default-domain`:
+To change the default domain per file, use the :dir:`default-domain` directive:
 
 .. code-block:: rst
 
