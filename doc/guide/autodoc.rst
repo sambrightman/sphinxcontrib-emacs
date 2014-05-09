@@ -44,9 +44,8 @@ obviously fail in specific cases:
 - Manually assembled definitions, e.g. explicitly setting the function cell of a
   symbol and its `function-documentation` property.
 
-In these cases, sphincontrib-emacs will fail to properly extract docstrings.
-
-As of now, there is no way to work around these limitations, other than writing
+In these cases, sphincontrib-emacs will fail to properly extract docstrings.  As
+of now, there is no way to work around these limitations, other than writing
 documentation manually.
 
 Primitive markup of docstrings

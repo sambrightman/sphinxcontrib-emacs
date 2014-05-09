@@ -20,10 +20,8 @@ The Emacs Lisp domain
 These directives live in the ``el`` domain.
 
 You can set this domain as default domain to refer to the directives and roles
-without the ``el:`` prefix.
-
-To change the default domain globally, set the configuration value
-``primary_domain`` in your :file:`conf.py` accordingly:
+without the ``el:`` prefix.  To change the default domain globally, set the
+configuration value ``primary_domain`` in your :file:`conf.py` accordingly:
 
 .. code-block:: python
 
