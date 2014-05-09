@@ -62,8 +62,8 @@ enable sphinxcontrib-emacs by adding it to the :confval:`extensions` setting:
    # ones.
    extensions = ['sphinxcontrib.emacs']
 
-Documenting the command
-=======================
+Documenting commands
+====================
 
 We start with documenting the interactive command, the most important feature of
 our `hello` library.

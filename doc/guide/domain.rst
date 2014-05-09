@@ -1,6 +1,6 @@
-========================
- Documenting Emacs Lisp
-========================
+================================
+ Documenting Emacs Lisp symbols
+================================
 
 .. default-domain:: rst
 

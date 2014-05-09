@@ -1,6 +1,6 @@
-====================================
- Autodocumenting Emacs Lisp objects
-====================================
+=============================================
+ Extracting docstrings of Emacs Lisp symbols
+=============================================
 
 .. default-domain:: rst
 
