@@ -81,7 +81,7 @@ class EmacsLispSymbol(ObjectDescription):
         Return a list of all signatures.
 
         """
-        symbol = self.lookup_auto_symbol(self.arguments[0])
+        symbol = self.lookup_auto_symbol(self.arguments[0].split(None, 1)[0])
         if symbol:
             return [self.get_auto_signature(symbol)]
         else:
