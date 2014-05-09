@@ -244,6 +244,16 @@ class AbstractInterpreter(object):
                 return
             symbol.properties[prop] = value
 
+    def make_local(self, context, _function, variable):
+        """A call to ``make-variable-buffer-local``.
+
+        Mark the ``variable`` as buffer-local.
+
+        """
+        if lisputil.is_quoted_symbol(variable):
+            symbol = self.env.intern(lisputil.unquote(variable))
+            symbol.properties['buffer-local'] = True
+
     def defun(self, context, _function, name, arglist, docstring=None, *_rest):
         """A call to ``defun`` or ``defmacro``.
 
@@ -276,7 +286,8 @@ class AbstractInterpreter(object):
                 docstring = None
         if rest and function == 'defcustom':
             symbol.properties.update(lisputil.parse_custom_keywords(rest))
-        symbol.properties['buffer-local'] = function.endswith('-local')
+        if function.endswith('-local'):
+            symbol.properties['buffer-local'] = True
 
     def defface(self, context, _function, name, _face_def, docstring, *rest):
         """A call to ``defface``.
@@ -299,6 +310,7 @@ class AbstractInterpreter(object):
     #: The default function table.
     DEFAULT_FUNCTIONS = {
         'put': put,
+        'make-variable-buffer-local': make_local,
         'defun': defun,
         'defun*': defun,
         'cl-defun': defun,

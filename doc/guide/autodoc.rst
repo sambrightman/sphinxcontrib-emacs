@@ -28,8 +28,8 @@ Emacs Lisp reader and interpreter to extract docstrings.  This reader and
 interpreter is limited in what it supports:
 
 - Static top-level definitions like `defun`, `defvar`, `defcustom` and friends.
-- Top-level `put` forms with static arguments, that is, quoted symbols and
-  literal primitives
+- Top-level `put` and related forms (e.g. `make-variable-buffer-local`) with
+  static arguments, that is, quoted symbols and literal primitives
 - Body forms of `eval-and-compile`, `progn`, and related forms
 
 Notably, it does **not** expand macros, inspect the body forms of definitions or
