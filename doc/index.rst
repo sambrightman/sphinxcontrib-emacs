@@ -36,6 +36,7 @@ User Guide
 
    guide/intro
    guide/installation
+   guide/quickstart
    guide/domain
    guide/autodoc
 

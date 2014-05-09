@@ -54,6 +54,9 @@ intersphinx_mapping = {'http://docs.python.org/': None,
 
 todo_include_todos = True
 
+emacs_lisp_load_path = [
+    os.path.abspath(os.path.join(os.path.dirname(__file__), 'sample'))
+]
 
 def setup(app):
     app.add_object_type('confval', 'confval',

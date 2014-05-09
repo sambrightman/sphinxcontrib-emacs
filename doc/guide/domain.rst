@@ -139,6 +139,7 @@ Documenting interactive commands
 
    .. el:command:: greet
       :binding: C-c g
+      :noindex:
 
       Prompt for a name and greet the user.
 
