@@ -90,7 +90,7 @@ Lisp domain <el-domain>`:
       directives to **every** file which uses docstrings from an Emacs Lisp
       source.
 
-:dir:`el:require` searches for source files in confval:`emacs_lisp_load_path`:
+:dir:`el:require` searches for source files in :confval:`emacs_lisp_load_path`:
 
 .. confval:: emacs_lisp_load_path
 
