@@ -103,7 +103,7 @@ In :file:`doc/hello.rst` we can now document the `hello` command:
 
    Use :el:option:`greeting` to change the greeting text.
 
-``:el:option:\`greeting\``` inserts a cross-reference to the documentation of
+``:el:option:`greeting``` inserts a cross-reference to the documentation of
 the ``greeting`` option, which we add :ref:`further down <quickstart-options>`.
 
 Documenting different invocations of commands
