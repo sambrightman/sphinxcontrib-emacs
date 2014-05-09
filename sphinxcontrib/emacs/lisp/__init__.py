@@ -311,6 +311,7 @@ class AbstractInterpreter(object):
         'defface': defface,
         'eval-and-compile': eval_inner,
         'eval-when-compile': eval_inner,
+        'progn': eval_inner,
     }
 
     def __init__(self, load_path, env=None, **functions):
