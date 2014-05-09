@@ -37,6 +37,7 @@ User Guide
    guide/intro
    guide/installation
    guide/domain
+   guide/autodoc
 
 License
 =======

@@ -12,6 +12,8 @@ the concept of domains.
 
 .. _Tutorial: http://sphinx-doc.org/tutorial.html
 
+.. _el-domain:
+
 The Emacs Lisp domain
 =====================
 
