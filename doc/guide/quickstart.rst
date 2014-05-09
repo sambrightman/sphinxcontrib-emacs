@@ -96,15 +96,19 @@ In :file:`doc/hello.rst` we can now document the `hello` command:
 
       Use :el:option:`greeting` to change the greeting text.
 
+``:el:option:`greeting``` inserts a cross-reference to the documentation of
+the ``greeting`` option, which we add :ref:`further down <quickstart-options>`.
+
+In `hello.el`, we install global key binding :kbd:`C-c g` for our command, so we
+document this additional binding in the ``:binding:`` option.  This binding now
+appears in the documentation of the ``greet`` command:
+
 .. el:command:: greet
    :binding: C-c g
 
    Prompt for the name of a user and greet them.
 
    Use :el:option:`greeting` to change the greeting text.
-
-``:el:option:`greeting``` inserts a cross-reference to the documentation of
-the ``greeting`` option, which we add :ref:`further down <quickstart-options>`.
 
 Documenting different invocations of commands
 =============================================
