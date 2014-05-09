@@ -106,11 +106,11 @@ class EmacsHelpModeMarkup(Transform):
             refdomain, reftype = parts
         else:
             refdomain = None
-        rawtext = "`'".format(reftarget)
+        rawtext = "`{0}'".format(reftarget)
         ref = pending_xref(rawtext, refwarn=False,
                            reftype=reftype, refdomain=refdomain,
                            refexplicit=False, reftarget=reftarget)
-        ref += innernodecls(reftarget, reftarget)
+        ref += innernodecls(rawtext, rawtext)
         result = []
         if prefix:
             result.append(nodes.Text(prefix, prefix))
@@ -151,8 +151,9 @@ class EmacsHelpModeMarkup(Transform):
 
     def _transform_url(self, value, match):
         prefix = match.group('urlprefix')
+        text = "`{0}'".format(value)
         return [nodes.Text(prefix, prefix),
-                nodes.reference(value, value, refuri=value, internal=False)]
+                nodes.reference(text, text, refuri=value, internal=False)]
 
     def _transform_literal(self, text, match):
         if self.SYMBOL_PATTERN.match(text):
