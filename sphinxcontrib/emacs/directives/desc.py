@@ -352,7 +352,7 @@ class EmacsLispVariable(EmacsLispSymbol):
         title = corenodes.title('Variable properties', 'Variable properties')
         body = corenodes.paragraph('', '')
         props = corenodes.admonition(
-            '', title, body, classes=['el-variable-properties'])
+            '', title, body, classes=['note', 'el-variable-properties'])
         if self.is_local_variable:
             self.add_inline_text(
                 'Automatically becomes buffer-local when set.  ', body)
