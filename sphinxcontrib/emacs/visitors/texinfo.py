@@ -85,8 +85,8 @@ def visit_el_parameter(self, node):
     raise nodes.SkipNode
 
 
-def visit_el_metavariable(self, node):
-    """Process a :class:`~sphinxcontrib.emacs.nodes.el_metavariable`
+def visit_info_metavariable(self, node):
+    """Process a :class:`~sphinxcontrib.emacs.nodes.info_metavariable`
 
     Add a corresponding ``@var`` command to the body, and skip the children of
     the node.

@@ -54,7 +54,7 @@ class el_parameter(addnodes.desc_parameter):
     pass
 
 
-class el_metavariable(nodes.emphasis):
+class info_metavariable(nodes.emphasis):
     """A node for a meta variable."""
     pass
 

@@ -82,9 +82,6 @@ class EmacsLispDomain(Domain):
         'face': XRefRole(),
         'cl-struct': XRefRole(),
         'cl-slot': rolefuncs.EmacsLispSlotXRefRole(),
-        # Special markup roles
-        'var': rolefuncs.var,
-        'varcode': rolefuncs.varcode,
     }
     indices = []
 

@@ -53,8 +53,8 @@ def visit_el_parameterlist(self, node):
     self.param_separator = node.child_text_separator
 
 
-def visit_el_metavariable(self, node):
-    """Process a :class:`~sphinxcontrib.emacs.nodes.el_metavariable`.
+def visit_info_metavariable(self, node):
+    """Process a :class:`~sphinxcontrib.emacs.nodes.info_metavariable`.
 
     Add the opening ``var`` tag to the body.
 
@@ -62,8 +62,8 @@ def visit_el_metavariable(self, node):
     self.body.append(self.starttag(node, 'var', ''))
 
 
-def depart_el_metavariable(self, _node):
-    """Depart from a :class:`~sphinxcontrib.emacs.nodes.el_metavariable`.
+def depart_info_metavariable(self, _node):
+    """Depart from a :class:`~sphinxcontrib.emacs.nodes.info_metavariable`.
 
     Add the closing ``var`` tag to the body.
 

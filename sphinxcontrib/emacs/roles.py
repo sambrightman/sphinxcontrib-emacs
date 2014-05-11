@@ -30,7 +30,7 @@ import re
 from docutils import nodes, utils
 from sphinx.roles import XRefRole
 
-from sphinxcontrib.emacs.nodes import el_metavariable
+from sphinxcontrib.emacs.nodes import info_metavariable
 from sphinxcontrib.emacs.info import INFO_RE
 
 
@@ -102,7 +102,7 @@ class InfoNodeXRefRole(XRefRole):
 
 def var(role, rawtext, text, _lineno, _inliner, _options=None, _content=None):
     """A role to indicate a meta variable."""
-    return [el_metavariable(rawtext, text, role=role, classes=[role])], []
+    return [info_metavariable(rawtext, text, role=role, classes=[role])], []
 
 
 #: Regular expression to extract meta variables from text.
@@ -114,7 +114,7 @@ def varcode(role, rawtext, text, _lineno, _inliner_, _options=None,
     """A role to indicate code with contained meta variables.
 
     Namely, all text enclosed with braces, e.g. ``{foo}``, in ``text`` is
-    enclosed in a :class:`~sphinxcontrib.emacs.nodes.el_metavariable` node.
+    enclosed in a :class:`~sphinxcontrib.emacs.nodes.info_metavariable` node.
 
     """
     text = utils.unescape(text)
@@ -124,7 +124,7 @@ def varcode(role, rawtext, text, _lineno, _inliner_, _options=None,
         if match.start() > position:
             leading = text[position:match.start()]
             node += nodes.Text(leading, leading)
-        node += el_metavariable(match.group(1), match.group(1))
+        node += info_metavariable(match.group(1), match.group(1))
         position = match.end()
     if position < len(text):
         node += nodes.Text(text[position:], text[position:])

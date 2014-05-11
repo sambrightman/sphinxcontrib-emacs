@@ -31,7 +31,7 @@ from docutils import nodes as corenodes
 from sphinx import addnodes
 
 from sphinxcontrib.emacs import nodes, visitors
-from sphinxcontrib.emacs.roles import InfoNodeXRefRole
+from sphinxcontrib.emacs.roles import InfoNodeXRefRole, var, varcode
 from sphinxcontrib.emacs.domain import EmacsLispDomain
 from sphinxcontrib.emacs.info import resolve_info_references, update_htmlxref
 from sphinxcontrib.emacs.lisp import AbstractInterpreter
@@ -57,6 +57,9 @@ def setup(app):
     app.add_domain(EmacsLispDomain)
     # Auto doc support
     app.add_config_value('emacs_lisp_load_path', [], 'env')
+    # Texinfo markup
+    app.add_role('var', var)
+    app.add_role('varcode', varcode)
     # Texinfo references
     app.add_role('infonode', InfoNodeXRefRole())
     app.connect(str('builder-inited'), update_htmlxref)
@@ -84,10 +87,10 @@ def setup(app):
                  html=visitors.delegate(addnodes.desc_parameter),
                  latex=visitors.delegate(addnodes.desc_parameter),
                  texinfo=(visitors.texinfo.visit_el_parameter, None))
-    app.add_node(nodes.el_metavariable,
-                 html=(visitors.html.visit_el_metavariable,
-                       visitors.html.depart_el_metavariable),
+    app.add_node(nodes.info_metavariable,
+                 html=(visitors.html.visit_info_metavariable,
+                       visitors.html.depart_info_metavariable),
                  latex=visitors.delegate(corenodes.emphasis),
-                 texinfo=(visitors.texinfo.visit_el_metavariable, None))
+                 texinfo=(visitors.texinfo.visit_info_metavariable, None))
     app.add_node(nodes.infonode_reference,
                  texinfo=(visitors.texinfo.visit_infonode_reference, None))
