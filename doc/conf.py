@@ -30,7 +30,6 @@ needs_sphinx = '1.2'
 extensions = [
     'sphinx.ext.autodoc',
     'sphinx.ext.intersphinx',
-    'sphinx.ext.todo',
     'sphinx.ext.ifconfig',
     'sphinxcontrib.emacs',
 ]
@@ -53,8 +52,6 @@ html_theme = 'default'
 
 intersphinx_mapping = {'http://docs.python.org/': None,
                        'http://sphinx-doc.org': None}
-
-todo_include_todos = True
 
 emacs_lisp_load_path = [
     os.path.abspath(os.path.join(os.path.dirname(__file__), 'sample'))

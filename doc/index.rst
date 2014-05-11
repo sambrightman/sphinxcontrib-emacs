@@ -14,20 +14,6 @@ Features
 - Autodoc for Emacs Lisp code
 - Better Texinfo integration to build online manuals for Emacs
 
-Status
-======
-
-This extension is in alpha state currently.
-
-.. ifconfig:: todo_include_todos
-
-   While it generally works well, there are a number of issues and lacking
-   features:
-
-   .. todolist::
-
-   If you know Python and Sphinx, please help us with fixing these.
-
 User Guide
 ==========
 
