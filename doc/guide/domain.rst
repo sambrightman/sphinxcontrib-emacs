@@ -322,7 +322,8 @@ Documenting CL structs
 
       As Cl slots are functions in Emacs Lisp, this directive creates a function
       reference to the slot.  Hence, the ``name`` slot from the above example
-      can be referenced either with :role:`el:slot` or with :role:`el:function`:
+      can be referenced either with :role:`el:cl-slot` or with
+      :role:`el:function`:
 
       .. code-block:: rst
 
