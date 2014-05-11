@@ -132,8 +132,9 @@ def parse_custom_keywords(sexp):
         except ValueError:
             pass
     safe_predicate = plist.get(':safe')
-    if is_quoted_symbol(safe_predicate):
-        properties['safe-local-variable'] = unquote(safe_predicate).value()
+    if is_quoted(safe_predicate):
+        properties['safe-local-variable'] = sexpdata.dumps(
+            unquote(safe_predicate))
     if plist.get(':risky'):
         properties['risky-local-variable'] = True
     return properties
