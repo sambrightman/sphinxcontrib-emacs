@@ -39,6 +39,7 @@ User Guide
    guide/quickstart
    guide/domain
    guide/autodoc
+   guide/texinfo
 
 License
 =======
