@@ -33,7 +33,7 @@ from sphinx import addnodes
 from sphinxcontrib.emacs import nodes, visitors
 from sphinxcontrib.emacs.roles import InfoNodeXRefRole
 from sphinxcontrib.emacs.domain import EmacsLispDomain
-from sphinxcontrib.emacs.info import resolve_info_references
+from sphinxcontrib.emacs.info import resolve_info_references, update_htmlxref
 from sphinxcontrib.emacs.lisp import AbstractInterpreter
 
 
@@ -59,6 +59,7 @@ def setup(app):
     app.add_config_value('emacs_lisp_load_path', [], 'env')
     # Texinfo references
     app.add_role('infonode', InfoNodeXRefRole())
+    app.connect(str('builder-inited'), update_htmlxref)
     app.connect(str('missing-reference'), resolve_info_references)
     # Nodes
     app.add_node(nodes.el_docstring_block,

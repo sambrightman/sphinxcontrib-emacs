@@ -39,5 +39,10 @@ def make_target(scope, name):
 
 
 def normalize_space(s):
-    "Normalize whitespace in the given string."
-    return re.sub(r'\s+', ' ', s)
+    """Normalize whitespace in the given string.
+
+    Remove leading and trailing whitespace, and collapse all other whitespace
+    to a single space.
+
+    """
+    return re.sub(r'\s+', ' ', s.strip())

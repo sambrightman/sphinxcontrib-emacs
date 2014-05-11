@@ -24,23 +24,82 @@ Info manual support.
 """
 
 import re
+from string import Template
 
+import requests
 from docutils import nodes
 
 from sphinxcontrib.emacs.util import normalize_space
 from sphinxcontrib.emacs.nodes import infonode_reference
 
 
+#: URL of the htmlxref database of GNU Texinfo
+HTMLXREF_URL = 'http://ftp.hawo.stw.uni-erlangen.de/gnu/texinfo/htmlxref.cnf'
+
 #: Regular expression object to parse the contents of an Info reference role.
 INFO_RE = re.compile(r'\A\((?P<manual>[^)]+)\)(?P<node>.+)\Z')
 
+HTMLXREF_RE = re.compile(r"""
+^\s*
+(?:
+(?P<comment>[#].*) |
+(?P<substname>\w+)\s*=\s*(?P<substurl>\S+) |
+(?P<manname>\w+)\s*(?P<mantype>node|mono)\s*(?P<manurl>\S+)
+)
+\s*$
+""", re.VERBOSE)
 
-#: Web URLs of Info manuals.
-INFO_MANUAL_URLS = {
-    'emacs': 'http://www.gnu.org/software/emacs/manual/html_node/emacs/{node}.html#{node}',
-    'elisp': 'http://www.gnu.org/software/emacs/manual/html_node/elisp/{node}.html#{node}',
-    'cl': 'http://www.gnu.org/software/emacs/manual/html_node/cl/{node}.html#{node}',
-}
+
+def parse_htmlxref(htmlxref):
+    substitutions = {}
+    manuals = {}
+    for line in htmlxref.splitlines():
+        match = HTMLXREF_RE.match(line)
+        if match:
+            if match.group('substname'):
+                url = Template(match.group('substurl')).substitute(
+                    substitutions)
+                substitutions[match.group('substname')] = url
+            elif match.group('manname') and match.group('mantype') == 'node':
+                url = Template(match.group('manurl')).substitute(
+                    substitutions)
+                manuals[match.group('manname')] = url
+    return manuals
+
+
+def update_htmlxref(app):
+    if not getattr(app.env, 'info_htmlxref', None):
+        app.info('fetching Texinfo htmlxref database from {0}... '.format(
+            HTMLXREF_URL))
+        app.env.info_htmlxref = parse_htmlxref(requests.get(HTMLXREF_URL).text)
+
+
+def ascii_encode(char):
+    return char if char.isalnum() or char == '-' else '_00' + char.encode('hex')
+
+
+def html_escape(node):
+    """Escape ``node`` for use in HTML.
+
+    See http://www.gnu.org/software/texinfo/manual/texinfo/html_node/HTML-Xref-Node-Name-Expansion.html.
+
+    """
+    normalized = normalize_space(node).replace(' ', '-')
+    encoded = ''.join(ascii_encode(c) for c in
+                      normalized.encode('ascii', errors='ignore'))
+    prefix = 'g_t' if not normalized[0].isalpha() else ''
+    return prefix + encoded
+
+
+def resolve_htmlxref(env, manual, node):
+    manual_url = env.info_htmlxref.get(manual)
+    if not manual_url:
+        return None
+    else:
+        escaped_node = html_escape(node)
+        target_doc = escaped_node if node != 'Top' else node
+        target_anchor = escaped_node
+        return manual_url + target_doc + '#' + target_anchor
 
 
 def resolve_info_references(app, _env, refnode, contnode):
@@ -55,7 +114,7 @@ def resolve_info_references(app, _env, refnode, contnode):
 
     For all other output formats, replace the pending reference with a
     :class:`~docutils.nodes.reference` node, which references the corresponding
-    web URL, as in :data:`INFO_MANUAL_URLS`.
+    web URL, as stored in the database referred to by :data:`HTMLXREF_URL`.
 
     """
     if refnode['reftype'] != 'infonode':
@@ -79,14 +138,13 @@ def resolve_info_references(app, _env, refnode, contnode):
         reference.append(contnode)
         return reference
     else:
-        base_uri = INFO_MANUAL_URLS.get(manual)
-        if not base_uri:
+        uri = resolve_htmlxref(app.env, manual, node)
+        if not uri:
             message = 'Cannot resolve info manual {0}'.format(manual)
             app.env.warn(refnode.source, message, refnode.line)
             return contnode
         else:
-            reference = nodes.reference('', '', internal=False)
-            reference['refuri'] = base_uri.format(node=node.replace(' ', '-'))
-            reference['reftitle'] = target
-            reference.append(contnode)
+            reference = nodes.reference('', '', internal=False,
+                                        refuri=uri, reftitle=target)
+            reference += contnode
             return reference
