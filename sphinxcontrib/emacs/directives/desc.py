@@ -27,11 +27,12 @@ from docutils import nodes as corenodes
 from docutils.parsers.rst import directives
 from sphinx import addnodes
 from sphinx.directives import ObjectDescription
-from sphinx.util.nodes import set_source_info
+from sphinx.util.nodes import set_source_info, set_role_source_info
 
 from sphinxcontrib.emacs import nodes
 from sphinxcontrib.emacs.util import make_target
 from sphinxcontrib.emacs.lisp.docstring import EmacsHelpModeMarkup
+from sphinxcontrib.emacs.lisp.util import SYMBOL_PATTERN
 
 
 class EmacsLispSymbol(ObjectDescription):
@@ -354,19 +355,29 @@ class EmacsLispVariable(EmacsLispSymbol):
         props = corenodes.admonition(
             '', title, body, classes=['note', 'el-variable-properties'])
         if self.is_local_variable:
-            self.add_inline_text(
-                'Automatically becomes buffer-local when set.  ', body)
+            body += corenodes.Text(
+                'Automatically becomes buffer-local when set.  ')
         if self.is_risky_variable:
-            self.add_inline_text(
+            body += corenodes.Text(
                 'This variable may be risky if used as a file-local '
-                'variable.  ', body)
+                'variable.  ')
         safe_predicate = self.get_safe_variable_predicate()
         if safe_predicate:
-            self.add_inline_text(
+            body += corenodes.Text(
                 'This variable is safe as a file local variable if its value '
-                'satisfies the predicate :el:function:`{0}`.  '.format(
-                    safe_predicate), body)
-
+                'satisfies the predicate ')
+            if SYMBOL_PATTERN.match(safe_predicate):
+                xref = addnodes.pending_xref(
+                    safe_predicate, reftype='function', refdomain='el',
+                    refexplicit=False, reftarget=safe_predicate,
+                    refwarn=False, refdoc=self.env.docname)
+                set_role_source_info(self.state.inliner, self.lineno, xref)
+                xref += corenodes.literal(safe_predicate, safe_predicate,
+                                          classes=['xref', 'el', 'el-function'])
+                body += xref
+            else:
+                body += corenodes.literal(safe_predicate, safe_predicate)
+            body += corenodes.Text('. ')
         return props if len(body) > 0 else None
 
     def run(self):

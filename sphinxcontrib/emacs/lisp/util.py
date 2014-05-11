@@ -23,7 +23,16 @@
 """Utilities for lisp processing."""
 
 
+import re
+
 import sexpdata
+
+
+#: Regular expression for a symbol.
+#
+# The list of non-symbol characters in this pattern is taken from
+# http://definitelyaplug.b0.cx/post/emacs-reader/
+SYMBOL_PATTERN = re.compile(r'^[^\s"\';()[\]`,]+$', re.UNICODE)
 
 
 def is_quoted(sexp):

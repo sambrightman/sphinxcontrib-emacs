@@ -30,6 +30,7 @@ from docutils.transforms import Transform
 from sphinx.addnodes import pending_xref
 
 from sphinxcontrib.emacs.nodes import el_docstring_block
+from sphinxcontrib.emacs.lisp.util import SYMBOL_PATTERN
 
 
 class EmacsHelpModeMarkup(Transform):
@@ -48,12 +49,6 @@ class EmacsHelpModeMarkup(Transform):
         (?:(?P<urlprefix>URL\s+)`(?P<url>[^']+)') | # A URL reference
         (?:`(?P<literal>[^']+)') # A literal reference
         """, re.MULTILINE | re.UNICODE | re.VERBOSE)
-
-    #: Regular expression for a symbol.
-    #
-    # The list of non-symbol characters in this pattern is taken from
-    # http://definitelyaplug.b0.cx/post/emacs-reader/
-    SYMBOL_PATTERN = re.compile(r'^[^\s"\';()[\]`,]+$', re.UNICODE)
 
     def apply(self):
         root = self.startnode or self.document
@@ -156,7 +151,7 @@ class EmacsHelpModeMarkup(Transform):
                 nodes.reference(text, text, refuri=value, internal=False)]
 
     def _transform_literal(self, text, match):
-        if self.SYMBOL_PATTERN.match(text):
+        if SYMBOL_PATTERN.match(text):
             return self._to_reference('el:symbol', text)
         else:
             node = nodes.literal(text, text)

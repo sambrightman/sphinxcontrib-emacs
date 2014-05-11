@@ -231,15 +231,8 @@ Documenting variables, user options and hooks
    The flag ``:local:`` denotes that the variable is automatically buffer-local.
 
    The option ``:safe:`` denotes that the variable is safe as local variable
-   with the given predicate.
-
-   .. warning::
-
-      Currently, this extension does not support lambda forms as arguments for
-      ``:safe:``.  The value must be a symbol name denoting the predicate
-      function.
-
-      .. todo:: Add support for lambda predicates.
+   with the given predicate.  If the predicate is a symbol, its function
+   definition is cross-referenced.
 
    The flag ``:risky:`` denotes that the variable is risky to use as local
    variable.
