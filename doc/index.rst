@@ -17,6 +17,10 @@ Features
 User Guide
 ==========
 
+The user guide documents how to use sphinxcontrib-emacs to document your Emacs
+projects.  It starts with an introduction, and a quickstart guide, and then goes
+on to document each feature of sphinxcontrib-emacs.
+
 .. toctree::
    :maxdepth: 2
 
@@ -30,18 +34,17 @@ User Guide
 Contribute
 ==========
 
-- :doc:`contributing`
-- Github_
-- `Issue Tracker`_
+This section of the documentation explains how to contribute to
+sphinxcontrib-emacs on Github_, and what to keep in mind when `reporting
+issues`_ and opening pull requests.
 
 .. toctree::
    :maxdepth: 2
-   :hidden:
 
    contributing
 
 .. _Github: https://github.com/flycheck/sphinxcontrib-emacs
-.. _Issue Tracker: https://github.com/flycheck/sphinxcontrib-emacs/issues
+.. _reporting issues: https://github.com/flycheck/sphinxcontrib-emacs/issues
 
 License
 =======
