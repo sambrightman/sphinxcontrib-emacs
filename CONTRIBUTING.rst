@@ -60,9 +60,9 @@ Write commit messages according to `Tim Pope's guidelines`_. In short:
 - Use present tense and write in the imperative: “Fix bug”, not “fixed bug” or
   “fixes bug”.
 - Separate paragraphs by blank lines.
-- Do *not* use special markup (e.g. Markdown).  Commit messages are plain text.
-  You may use ``*emphasis*`` or ``_underline_`` though, following conventions
-  established on mailing lists.
+- Do *not* use special markup (e.g. reST or Markdown).  Commit messages are
+  plain text.  You may use ``*emphasis*`` or ``_underline_`` though, following
+  conventions established on mailing lists.
 
 This is a model commit message::
 
