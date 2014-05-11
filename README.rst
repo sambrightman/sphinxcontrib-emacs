@@ -28,21 +28,23 @@ The extension requires Sphinx 1.2 and Python 2.x.
 
    Python 3 is not supported currently!
 
-Documentation
-=============
+Support
+=======
 
 - `User guide`_
+- `Issue tracker`_
 
 .. _User guide: http://sphinxcontrib-emacs.readthedocs.org/en/latest/#user-guide
-
-Support and development
-=======================
-
-- `Issue tracker`_
-- Github_
-
 .. _Issue tracker: https://github.com/flycheck/sphinxcontrib-emacs/issues
+
+Contribute
+==========
+
+- Github_
+- `Contribution guidelines`_
+
 .. _Github: https://github.com/flycheck/sphinxcontrib-emacs
+.. _Contribution guidelines: ./CONTRIBUTING.rst
 
 License
 =======
