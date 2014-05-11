@@ -6,6 +6,7 @@
 
 # distutils build files
 /build/
+/dist/
 
 # Directory local variables
 .dir-locals.el
