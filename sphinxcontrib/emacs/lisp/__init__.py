@@ -244,7 +244,7 @@ class AbstractInterpreter(object):
                 return
             symbol.properties[prop] = value
 
-    def make_local(self, context, _function, variable):
+    def make_local(self, _context, _function, variable):
         """A call to ``make-variable-buffer-local``.
 
         Mark the ``variable`` as buffer-local.
