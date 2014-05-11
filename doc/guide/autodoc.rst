@@ -10,6 +10,12 @@ them in your documentation.
 This page explains the advantages and drawbacks of this approach, and guides you
 through setup and usage.
 
+.. warning::
+
+   When extracting docstrings from Emacs Lisp source code, be sure to respect
+   the license of the corresponding source code, which covers the docstrings as
+   well.
+
 Pros and cons
 =============
 
