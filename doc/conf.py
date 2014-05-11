@@ -23,6 +23,8 @@ import sys
 
 sys.path.append(os.path.join(os.path.dirname(__file__), os.pardir))
 
+from sphinxcontrib.emacs import __version__
+
 needs_sphinx = '1.2'
 
 extensions = [
@@ -42,8 +44,8 @@ master_doc = 'index'
 project = u'sphinxcontrib-emacs'
 copyright = u'2014, Sebastian Wiesner'
 
-version = '0.1'
-release = '0.1'
+version = '.'.join(__version__.split('.')[:2])
+release = __version__
 
 pygments_style = 'sphinx'
 
