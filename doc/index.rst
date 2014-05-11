@@ -41,6 +41,22 @@ User Guide
    guide/autodoc
    guide/texinfo
 
+Contribute
+==========
+
+- :doc:`contributing`
+- Github_
+- `Issue Tracker`_
+
+.. toctree::
+   :maxdepth: 2
+   :hidden:
+
+   contributing
+
+.. _Github: https://github.com/flycheck/sphinxcontrib-emacs
+.. _Issue Tracker: https://github.com/flycheck/sphinxcontrib-emacs/issues
+
 License
 =======
 
