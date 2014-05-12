@@ -37,7 +37,7 @@ from sphinxcontrib.emacs.info import resolve_info_references, update_htmlxref
 from sphinxcontrib.emacs.lisp import AbstractInterpreter
 
 
-__version__ = '0.1'
+__version__ = '0.2a0'
 
 
 def register_interpreter_function(symbol, function):
