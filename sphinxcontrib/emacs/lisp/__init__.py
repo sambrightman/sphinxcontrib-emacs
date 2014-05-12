@@ -138,7 +138,7 @@ class Feature(namedtuple('_Feature', 'name filename load_time')):
 
         """
         return (os.path.isfile(self.filename) and
-                os.path.getmtime(self.filename) <= self.load_time)
+                os.path.getmtime(self.filename) > self.load_time)
 
 
 class AbstractEnvironment(object):
