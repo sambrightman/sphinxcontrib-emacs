@@ -44,7 +44,7 @@ Contribute
 - `Contribution guidelines`_
 
 .. _Github: https://github.com/flycheck/sphinxcontrib-emacs
-.. _Contribution guidelines: ./CONTRIBUTING.rst
+.. _Contribution guidelines: https://github.com/flycheck/sphinxcontrib-emacs/blob/master/CONTRIBUTING.rst
 
 License
 =======
