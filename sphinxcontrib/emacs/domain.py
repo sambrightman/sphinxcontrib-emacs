@@ -23,8 +23,6 @@
 """The domain class."""
 
 
-from itertools import ifilter
-
 from sphinx.roles import XRefRole
 from sphinx.domains import Domain, ObjType
 from sphinx.util.nodes import make_refnode
