@@ -2,9 +2,10 @@
  sphinxcontrib-emacs
 =====================
 
-sphinxcontrib-emacs_ is a Sphinx_ extension to document Emacs_ code.
+http://sphinxcontrib-emacs.readthedocs.org/
 
-.. _sphinxcontrib-emacs: http://sphinxcontrib-emacs.readthedocs.org/
+sphinxcontrib-emacs is a Sphinx_ extension to document Emacs_ code.
+
 .. _Sphinx: http://sphinx-doc.org
 .. _Emacs: http://www.gnu.org/software/emacs/
 
