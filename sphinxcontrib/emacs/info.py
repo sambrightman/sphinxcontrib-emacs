@@ -74,19 +74,25 @@ def update_htmlxref(app):
         app.env.info_htmlxref = parse_htmlxref(requests.get(HTMLXREF_URL).text)
 
 
-def ascii_encode(char):
-    return char if char.isalnum() or char == '-' else '_00' + char.encode('hex')
+def node_encode(char):
+    if char.isalnum():
+        return char
+    elif char == ' ':
+        return '-'
+    else:
+        return '_00' + char.encode('hex')
 
 
-def html_escape(node):
-    """Escape ``node`` for use in HTML.
+def expand_node_name(node):
+    """Expand ``node`` for use in HTML.
+
+    ``node`` is the name of a node as string.
 
     See http://www.gnu.org/software/texinfo/manual/texinfo/html_node/HTML-Xref-Node-Name-Expansion.html.
 
     """
-    normalized = normalize_space(node).replace(' ', '-')
-    encoded = ''.join(ascii_encode(c) for c in
-                      normalized.encode('ascii', errors='ignore'))
+    normalized = normalize_space(node).cgencode('ascii', errors='ignore')
+    encoded = ''.join(node_encode(c) for c in normalized)
     prefix = 'g_t' if not normalized[0].isalpha() else ''
     return prefix + encoded
 
@@ -96,7 +102,7 @@ def resolve_htmlxref(env, manual, node):
     if not manual_url:
         return None
     else:
-        escaped_node = html_escape(node)
+        escaped_node = expand_node_name(node)
         target_doc = escaped_node if node != 'Top' else node
         target_anchor = escaped_node
         return manual_url + target_doc + '#' + target_anchor
