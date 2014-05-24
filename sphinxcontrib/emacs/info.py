@@ -105,7 +105,7 @@ def resolve_htmlxref(env, manual, node):
         escaped_node = expand_node_name(node)
         target_doc = escaped_node if node != 'Top' else node
         target_anchor = escaped_node
-        return manual_url + target_doc + '#' + target_anchor
+        return manual_url + target_doc + '.html#' + target_anchor
 
 
 def resolve_info_references(app, _env, refnode, contnode):
