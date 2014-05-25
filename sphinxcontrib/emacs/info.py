@@ -64,13 +64,18 @@ def expand_node_name(node):
 
     ``node`` is the name of a node as string.
 
-    See http://www.gnu.org/software/texinfo/manual/texinfo/html_node/HTML-Xref-Node-Name-Expansion.html.
+    Return a pair ``(filename, anchor)``, where ``filename`` is the base-name
+    of the corresponding file, sans extension, and ``anchor`` the HTML anchor.
 
+    See http://www.gnu.org/software/texinfo/manual/texinfo/html_node/HTML-Xref-Node-Name-Expansion.html.
     """
-    normalized = normalize_space(node).encode('ascii', errors='ignore')
-    encoded = ''.join(node_encode(c) for c in normalized)
-    prefix = 'g_t' if not normalized[0].isalpha() else ''
-    return prefix + encoded
+    if node == 'Top':
+        return ('index', 'Top')
+    else:
+        normalized = normalize_space(node).encode('ascii', errors='ignore')
+        encoded = ''.join(node_encode(c) for c in normalized)
+        prefix = 'g_t' if not node[0].isalpha() else ''
+        return (encoded, prefix + encoded)
 
 
 class HTMLXRefDB(object):
@@ -100,10 +105,8 @@ class HTMLXRefDB(object):
         if not manual_url:
             return None
         else:
-            escaped_node = expand_node_name(node)
-            target_doc = escaped_node if node != 'Top' else node
-            target_anchor = escaped_node
-            return manual_url + target_doc + '.html#' + target_anchor
+            filename, anchor = expand_node_name(node)
+            return manual_url + filename + '.html#' + anchor
 
 
 def update_htmlxref(app):
