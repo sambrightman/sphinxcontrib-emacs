@@ -52,6 +52,34 @@ def test_source_empty():
     assert lisp.Source(file=None, feature=None).empty
 
 
+class TestAbstractEnvironment(object):
+
+    def test_intern(self, env):
+        spam = env.intern('spam')
+        assert spam
+        assert spam.name == 'spam'
+        assert spam is env.top_level['spam']
+
+    def test_intern_symbol(self, env):
+        spam = env.intern(l('spam'))
+        assert spam
+        assert spam.name == 'spam'
+        assert spam is env.top_level['spam']
+
+    def test_intern_does_not_overwrite(self, env):
+        spam = env.intern('spam')
+        assert spam
+        spam_new = env.intern('spam')
+        assert spam is spam_new
+        assert env.top_level['spam'] is spam
+
+    def test_intern_invalid_symbol_name(self, env):
+        sexp = l('(spam with eggs)')
+        with pytest.raises(ValueError) as excinfo:
+            env.intern(sexp)
+        assert str(excinfo.value) == "Invalid symbol name: {0!r}".format(sexp)
+
+
 @pytest.mark.parametrize('form', [
     'defun', 'defun*', 'cl-defun', 'defmacro', 'defmacro*', 'cl-defmacro'
 ])
