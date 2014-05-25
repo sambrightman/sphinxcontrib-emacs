@@ -50,6 +50,10 @@ nitpick_ignore = [
     ('el:function', 'stringp'),
 ]
 
+linkcheck_ignore = [
+    r'^https://help.github.com/.*$', # Gives 404 for whatever reason
+]
+
 pygments_style = 'sphinx'
 
 html_theme = 'default'
