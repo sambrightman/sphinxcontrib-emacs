@@ -97,7 +97,7 @@ def parse_plist(sexp):
     the values the unmodified sexp of the corresponding plist values.
 
     """
-    if not isinstance(sexp, list):
+    if not isinstance(sexp, (list, tuple)):
         raise ValueError('Not a list: {0!r}'.format(sexp))
     keys = [s.value() for s in sexp[::2]]
     values = sexp[1::2]
