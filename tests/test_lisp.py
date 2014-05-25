@@ -46,6 +46,12 @@ def test_broken_function_quotes():
         l("('eggs 'eggsp 'spam 'spamp)")
 
 
+def test_source_empty():
+    assert not lisp.Source(file='foo', feature=None).empty
+    assert not lisp.Source(file=None, feature='foo').empty
+    assert lisp.Source(file=None, feature=None).empty
+
+
 @pytest.mark.parametrize('form', [
     'defun', 'defun*', 'cl-defun', 'defmacro', 'defmacro*', 'cl-defmacro'
 ])
