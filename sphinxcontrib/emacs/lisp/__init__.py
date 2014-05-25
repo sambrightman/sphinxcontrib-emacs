@@ -262,7 +262,7 @@ class AbstractInterpreter(object):
         """
         symbol = self.intern_in_scope(name, 'function', context)
         symbol.properties['function-arglist'] = [s.value() for s in arglist]
-        if docstring:
+        if isinstance(docstring, basestring):
             symbol.properties['function-documentation'] = docstring
 
     def defvar(self, context, function, name, _initial_value=None,
