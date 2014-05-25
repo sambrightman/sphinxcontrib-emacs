@@ -80,7 +80,9 @@ def parse_cons_cell(sexp):
     :exc:`ValueError`, if ``sexp`` is not a cons cell.
 
     """
-    if len(sexp) == 3 and sexp[1] == sexpdata.Symbol('.'):
+    if isinstance(sexp, list) and \
+       len(sexp) == 3 and \
+       sexp[1] == sexpdata.Symbol('.'):
         return sexp[0], sexp[2]
     else:
         raise ValueError('Not a cons cell: {0!r}'.format(sexp))
