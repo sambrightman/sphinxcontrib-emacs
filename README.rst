@@ -2,6 +2,17 @@
  sphinxcontrib-emacs
 =====================
 
+.. default-role:: code
+
+.. |travis| image:: https://travis-ci.org/flycheck/sphinxcontrib-emacs.svg?branch=master
+            :target: https://travis-ci.org/flycheck/sphinxcontrib-emacs
+
+.. |license| image:: https://img.shields.io/badge/license-MIT-green.svg?dummy
+             :target: https://github.com/flycheck/sphinxcontrib-emacs/blob/master/LICENSE
+
+|license| |travis|
+
+
 http://sphinxcontrib-emacs.readthedocs.org/
 
 sphinxcontrib-emacs is a Sphinx_ extension to document Emacs_ code.
