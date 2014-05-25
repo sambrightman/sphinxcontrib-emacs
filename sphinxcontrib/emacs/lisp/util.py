@@ -88,7 +88,7 @@ def parse_cons_cell(sexp):
         raise ValueError('Not a cons cell: {0!r}'.format(sexp))
 
 
-def parse_plist(sexps):
+def parse_plist(sexp):
     """Turn ``sexp`` into a dictionary.
 
     ``sexp`` should be in the form of a property list.
@@ -97,8 +97,10 @@ def parse_plist(sexps):
     the values the unmodified sexp of the corresponding plist values.
 
     """
-    keys = [s.value() for s in sexps[::2]]
-    values = sexps[1::2]
+    if not isinstance(sexp, list):
+        raise ValueError('Not a list: {0!r}'.format(sexp))
+    keys = [s.value() for s in sexp[::2]]
+    values = sexp[1::2]
     return dict(zip(keys, values))
 
 
