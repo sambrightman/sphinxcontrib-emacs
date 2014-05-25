@@ -50,30 +50,6 @@ HTMLXREF_RE = re.compile(r"""
 """, re.VERBOSE)
 
 
-def parse_htmlxref(htmlxref):
-    substitutions = {}
-    manuals = {}
-    for line in htmlxref.splitlines():
-        match = HTMLXREF_RE.match(line)
-        if match:
-            if match.group('substname'):
-                url = Template(match.group('substurl')).substitute(
-                    substitutions)
-                substitutions[match.group('substname')] = url
-            elif match.group('manname') and match.group('mantype') == 'node':
-                url = Template(match.group('manurl')).substitute(
-                    substitutions)
-                manuals[match.group('manname')] = url
-    return manuals
-
-
-def update_htmlxref(app):
-    if not getattr(app.env, 'info_htmlxref', None):
-        app.info('fetching Texinfo htmlxref database from {0}... '.format(
-            HTMLXREF_URL))
-        app.env.info_htmlxref = parse_htmlxref(requests.get(HTMLXREF_URL).text)
-
-
 def node_encode(char):
     if char.isalnum():
         return char
@@ -91,21 +67,51 @@ def expand_node_name(node):
     See http://www.gnu.org/software/texinfo/manual/texinfo/html_node/HTML-Xref-Node-Name-Expansion.html.
 
     """
-    normalized = normalize_space(node).cgencode('ascii', errors='ignore')
+    normalized = normalize_space(node).encode('ascii', errors='ignore')
     encoded = ''.join(node_encode(c) for c in normalized)
     prefix = 'g_t' if not normalized[0].isalpha() else ''
     return prefix + encoded
 
 
-def resolve_htmlxref(env, manual, node):
-    manual_url = env.info_htmlxref.get(manual)
-    if not manual_url:
-        return None
-    else:
-        escaped_node = expand_node_name(node)
-        target_doc = escaped_node if node != 'Top' else node
-        target_anchor = escaped_node
-        return manual_url + target_doc + '.html#' + target_anchor
+class HTMLXRefDB(object):
+
+    @classmethod
+    def parse(cls, htmlxref):
+        substitutions = {}
+        manuals = {}
+        for line in htmlxref.splitlines():
+            match = HTMLXREF_RE.match(line)
+            if match:
+                if match.group('substname'):
+                    url = Template(match.group('substurl')).substitute(
+                        substitutions)
+                    substitutions[match.group('substname')] = url
+                elif match.group('manname') and match.group('mantype') == 'node':
+                    url = Template(match.group('manurl')).substitute(
+                        substitutions)
+                    manuals[match.group('manname')] = url
+        return cls(manuals)
+
+    def __init__(self, entries):
+        self.entries = entries
+
+    def resolve(self, manual, node):
+        manual_url = self.entries.get(manual)
+        if not manual_url:
+            return None
+        else:
+            escaped_node = expand_node_name(node)
+            target_doc = escaped_node if node != 'Top' else node
+            target_anchor = escaped_node
+            return manual_url + target_doc + '.html#' + target_anchor
+
+
+def update_htmlxref(app):
+    if not isinstance(getattr(app.env, 'info_htmlxref', None), HTMLXRefDB):
+        app.info('fetching Texinfo htmlxref database from {0}... '.format(
+            HTMLXREF_URL))
+        app.env.info_htmlxref = HTMLXRefDB.parse(
+            requests.get(HTMLXREF_URL).text)
 
 
 def resolve_info_references(app, _env, refnode, contnode):
@@ -144,7 +150,8 @@ def resolve_info_references(app, _env, refnode, contnode):
         reference.append(contnode)
         return reference
     else:
-        uri = resolve_htmlxref(app.env, manual, node)
+        xrefdb = app.env.info_htmlxref
+        uri = xrefdb.resolve(manual, node)
         if not uri:
             message = 'Cannot resolve info manual {0}'.format(manual)
             app.env.warn(refnode.source, message, refnode.line)
