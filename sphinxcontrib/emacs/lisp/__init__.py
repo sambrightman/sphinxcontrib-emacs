@@ -234,15 +234,16 @@ class AbstractInterpreter(object):
         Tries to set the symbol property as set by ``put``.
 
         """
-        if all(lisputil.is_quoted_symbol(s) for s in [name, prop]):
-            symbol = self.env.intern(lisputil.unquote(name))
-            prop = lisputil.unquote(prop).value()
-            if lisputil.is_quoted_symbol(value):
-                value = self.env.intern(lisputil.unquote(value))
-            elif not lisputil.is_primitive(value):
-                # We cannot handle non-constant values
-                return
-            symbol.properties[prop] = value
+        if lisputil.is_quoted_symbol(name) and lisputil.is_quoted_symbol(prop):
+            if lisputil.is_quoted(value):
+                value = lisputil.unquote(value)
+            if isinstance(value, sexpdata.Symbol):
+                value = self.env.intern(value)
+            if lisputil.is_primitive(value) or isinstance(value, Symbol):
+                # We can only handle constant values
+                symbol = self.env.intern(lisputil.unquote(name))
+                prop = lisputil.unquote(prop).value()
+                symbol.properties[prop] = value
 
     def make_local(self, _context, _function, variable):
         """A call to ``make-variable-buffer-local``.
