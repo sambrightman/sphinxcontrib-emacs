@@ -46,6 +46,10 @@ copyright = u'2014, Sebastian Wiesner'
 version = '.'.join(__version__.split('.')[:2])
 release = __version__
 
+nitpick_ignore = [
+    ('el:function', 'stringp'),
+]
+
 pygments_style = 'sphinx'
 
 html_theme = 'default'
