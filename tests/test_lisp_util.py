@@ -24,14 +24,13 @@
 Test utilities for Lisp processing.
 """
 
-import sexpdata
 import pytest
 
 import sphinxcontrib.emacs.lisp.util as lisp_util
 
 
 #: A little shortcut to parse lisp expression
-l = sexpdata.loads
+l = pytest.l
 
 
 @pytest.mark.parametrize('sexp,is_quoted', [
