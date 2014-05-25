@@ -35,7 +35,8 @@ from sphinxcontrib.emacs.info import (HTMLXRefDB, HTMLXREF_URL,
     ('Structures', 'Structures', 'Structures'),
     ('Library  Search', 'Library-Search', 'Library-Search'),
     ('Multi-file  Packages', 'Multi_002dfile-Packages', 'Multi_002dfile-Packages'),
-    ('%-Constructs', '_0025_002dConstructs', 'g_t_0025_002dConstructs')
+    ('%-Constructs', '_0025_002dConstructs', 'g_t_0025_002dConstructs'),
+    ('Top', 'index', 'Top')
 ])
 def test_expand_node_name(node, filename, anchor):
     assert expand_node_name(node) == (filename, anchor)
@@ -66,7 +67,9 @@ class TestHTMLXRefDB(object):
         ('elisp', 'Multi-file Packages',
          'http://www.gnu.org/software/emacs/manual/html_node/elisp/Multi_002dfile-Packages.html#Multi_002dfile-Packages'),
         ('elisp', '%-Constructs',
-         'http://www.gnu.org/software/emacs/manual/html_node/elisp/_0025_002dConstructs.html#g_t_0025_002dConstructs')
+         'http://www.gnu.org/software/emacs/manual/html_node/elisp/_0025_002dConstructs.html#g_t_0025_002dConstructs'),
+        ('elisp', 'Top',
+         'http://www.gnu.org/software/emacs/manual/html_node/elisp/index.html#Top')
     ])
     def test_resolve(self, xrefdb, manual, node, url):
         assert xrefdb.resolve(manual, node) == url
