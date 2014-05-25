@@ -182,7 +182,7 @@ class AbstractEnvironment(object):
         """
         if isinstance(name, sexpdata.Symbol):
             name = name.value()
-        else:
+        if not isinstance(name, basestring):
             raise ValueError('Invalid symbol name: {0!r}'.format(name))
         return self.top_level.setdefault(name, Symbol(name))
 
