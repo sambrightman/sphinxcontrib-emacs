@@ -147,3 +147,24 @@ def parse_package_version_invalid(sexp):
         lisp_util.parse_package_version(sexp)
     assert str(excinfo.value) == \
         'Not a valid :package-version: {0!r}'.format(sexp)
+
+
+def test_parse_custom_keywords_safe():
+    sexp = l("""\
+    (:package-version '(spam . "0.1")
+     :safe 'eggsp
+     :risky nil)""")
+    assert lisp_util.parse_custom_keywords(sexp) == {
+        'safe-local-variable': 'eggsp',
+        'custom-package-version': ('spam', '0.1'),
+    }
+
+
+def test_parse_custom_keywords_risky():
+    sexp = l("""\
+    (:package-version '(spam . "0.1")
+     :risky t)""")
+    assert lisp_util.parse_custom_keywords(sexp) == {
+        'risky-local-variable': True,
+        'custom-package-version': ('spam', '0.1'),
+    }
