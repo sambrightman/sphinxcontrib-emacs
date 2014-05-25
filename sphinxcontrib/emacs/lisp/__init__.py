@@ -426,3 +426,11 @@ class AbstractInterpreter(object):
         if function:
             # pylint: disable=W0142
             return function(self, context or {}, function_name.value(), *args)
+
+    def evals(self, string, context=None):
+        """
+        Read and evaluate ``string`` in ``context``.
+
+        Shortcut for ``eval(read(string), context)``.
+        """
+        return self.eval(self.read(string), context)
