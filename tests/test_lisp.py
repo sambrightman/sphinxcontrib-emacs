@@ -79,6 +79,32 @@ class TestAbstractEnvironment(object):
             env.intern(sexp)
         assert str(excinfo.value) == "Invalid symbol name: {0!r}".format(sexp)
 
+    def test_provide_without_filename(self, env):
+        feature = env.provide('spam')
+        assert env.features == {'spam': feature}
+        assert env.features['spam'] is feature
+        assert feature.name == 'spam'
+        assert feature.filename is None
+        assert feature.load_time == 0
+
+    def test_provide_with_filename(self, tmpdir, env):
+        filename = tmpdir.join('spam.el')
+        filename.write('A test file')
+        feature = env.provide('eggs', filename=str(filename))
+        assert env.features == {'eggs': feature}
+        assert env.features['eggs'] is feature
+        assert feature.name == 'eggs'
+        assert feature.filename == filename
+        assert feature.load_time == filename.mtime()
+
+    def test_is_provided(self, env):
+        assert not env.is_provided('spam')
+        assert not env.is_provided('eggs')
+        feature = env.provide('spam')
+        assert env.is_provided(feature)
+        assert env.is_provided('spam')
+        assert not env.is_provided('eggs')
+
 
 @pytest.mark.parametrize('form', [
     'defun', 'defun*', 'cl-defun', 'defmacro', 'defmacro*', 'cl-defmacro'
