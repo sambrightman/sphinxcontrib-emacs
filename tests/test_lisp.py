@@ -46,10 +46,12 @@ def test_broken_function_quotes():
         l("('eggs 'eggsp 'spam 'spamp)")
 
 
-def test_source_empty():
-    assert not lisp.Source(file='foo', feature=None).empty
-    assert not lisp.Source(file=None, feature='foo').empty
-    assert lisp.Source(file=None, feature=None).empty
+class TestSource(object):
+
+    def test_empty(self):
+        assert not lisp.Source(file='foo', feature=None).empty
+        assert not lisp.Source(file=None, feature='foo').empty
+        assert lisp.Source(file=None, feature=None).empty
 
 
 class TestAbstractEnvironment(object):
