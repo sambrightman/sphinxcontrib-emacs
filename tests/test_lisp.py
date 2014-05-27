@@ -54,7 +54,37 @@ class TestSource(object):
         assert lisp.Source(file=None, feature=None).empty
 
 
+class TestFeature(object):
+
+    def test_outdated(self, tmpdir):
+        filename = tmpdir.join('hello.el')
+        filename.write('Hello world')
+        feature = lisp.Feature(name='hello', filename=str(filename),
+                               load_time=filename.mtime())
+        assert not feature.outdated
+        # Simulate a modification of the file
+        filename.setmtime(feature.load_time + 1000)
+        assert feature.outdated
+        # If the file does not exist, a feature can't be outdated
+        filename.remove()
+        assert not feature.outdated
+
+
 class TestAbstractEnvironment(object):
+
+    def test_outdated(self, env, tmpdir):
+        spam_file = tmpdir.join('spam')
+        spam_file.ensure()
+        eggs_file = tmpdir.join('eggs')
+        eggs_file.ensure()
+        env.provide('spam', str(spam_file))
+        env.provide('eggs', str(eggs_file))
+        assert not env.outdated
+        # Simulate a modification of eggs
+        eggs_file.setmtime(eggs_file.mtime() + 1000)
+        assert env.outdated
+        eggs_file.remove()
+        assert not env.outdated
 
     def test_intern(self, env):
         spam = env.intern('spam')
