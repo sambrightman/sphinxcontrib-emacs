@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright (c) 2014 Sebastian Wiesner <lunaryorn@gmail.com>
+# Copyright (c) 2014 Sebastian Wiesner <swiesner@lunaryorn.com>
 
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal
@@ -61,7 +61,7 @@ setup(
     url='https://github.com/flycheck/sphinxcontrib-emacs',
     license='MIT License',
     author='Sebastian Wiesner',
-    author_email='lunaryorn@gmail.com',
+    author_email='swiesner@lunaryorn.com',
     description='Emacs documentation support for Sphinx',
     long_description=read_file('README.rst'),
     zip_safe=False,
