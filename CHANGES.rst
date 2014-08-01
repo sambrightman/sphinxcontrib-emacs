@@ -1,5 +1,5 @@
-master (in development)
-=======================
+0.2 (Aug 1, 2014)
+=================
 
 - Add `info_xref` configuration value to add additional Info manuals for HTML
   cross-referencing
