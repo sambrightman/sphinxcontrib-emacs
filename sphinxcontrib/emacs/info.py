@@ -115,6 +115,7 @@ def update_htmlxref(app):
             HTMLXREF_URL))
         app.env.info_htmlxref = HTMLXRefDB.parse(
             requests.get(HTMLXREF_URL).text)
+    app.env.info_htmlxref.entries.update(app.config.info_xref)
 
 
 def resolve_info_references(app, _env, refnode, contnode):

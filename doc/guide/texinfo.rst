@@ -67,11 +67,31 @@ To reference pages (“nodes”) in other Info manuals, use the special
    online version of the Info manual.
 
    The online version of the Info manual is looked up in the latest `Info manual
-   database`_ of Texinfo.
+   database`_ of Texinfo.  Use :confval:`info_xref` to add explicit entries to
+   the database.
 
    .. _Introduction: http://www.gnu.org/software/emacs/manual/html_node/emacs/Intro.html#Intro
    .. _GNU Emacs manual: http://www.gnu.org/software/emacs/manual/html_node/emacs/index.html
    .. _Info manual database: http://ftpmirror.gnu.org/texinfo/htmlxref.cnf
+
+.. confval:: info_xref
+
+   Additional Info manuals for cross-referencing.
+
+   The value is a dictionary, mapping the name of a manual to the **root URL**
+   of the split HTML version, i.e. the HTML version that has a single page per
+   node.
+
+   For instance, the following setting adds the manual of ERT, the Emacs unit
+   testing library:
+
+   .. code-block:: python
+
+      info_xref = {'ert': 'http://www.gnu.org/software/emacs/manual/html_node/ert/'}
+
+   Entries in this configuration value override entries retrieved from the
+   online database.  The online database is still consulted for other manuals,
+   though.
 
 In Info manuals these special references have a couple of advantages over a
 standard reference to the online version of the referenced manual:

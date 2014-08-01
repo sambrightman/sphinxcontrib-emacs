@@ -64,6 +64,7 @@ def setup(app):
     app.add_role('infonode', InfoNodeXRefRole())
     app.connect(str('builder-inited'), update_htmlxref)
     app.connect(str('missing-reference'), resolve_info_references)
+    app.add_config_value('info_xref', [], 'env')
     # Nodes
     app.add_node(nodes.el_docstring_block,
                  html=(visitors.html.visit_el_docstring_block,
