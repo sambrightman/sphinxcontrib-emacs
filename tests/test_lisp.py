@@ -46,6 +46,11 @@ def test_broken_function_quotes():
         l("('eggs 'eggsp 'spam 'spamp)")
 
 
+def test_process_backquotes():
+    sexp = l("(`(foo `(spam) ,bar))")
+    assert lisp.process_backquotes(sexp) == l("('(foo '(spam) ,bar))")
+
+
 class TestSource(object):
 
     def test_empty(self):
