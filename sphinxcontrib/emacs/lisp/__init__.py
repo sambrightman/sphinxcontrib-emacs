@@ -51,6 +51,35 @@ def strip_broken_function_quotes(sexp):
         return sexp
 
 
+def process_backquotes(sexp):
+    """Process backquotes in ``sexp``.
+
+    :mod:`sexpdata` does not handle backquotes, so we need to do that on our
+    own.
+
+    This function recursively turns backquotes into :class:`sexpdata.Quoted`
+    objects.
+
+    """
+    if isinstance(sexp, list):
+        result = []
+        quote_next = False
+        for nested_sexp in sexp:
+            if quote_next:
+                quote_next = False
+                quoted = sexpdata.Quoted(process_backquotes(nested_sexp))
+                quoted.backtick = True
+                result.append(quoted)
+            elif nested_sexp == sexpdata.Symbol('`'):
+                # Drop the quote
+                quote_next = True
+            else:
+                result.append(nested_sexp)
+        return result
+    else:
+        return sexp
+
+
 class Source(namedtuple('_Source', 'file feature')):
     """The source of a definition.
 
@@ -420,7 +449,7 @@ class AbstractInterpreter(object):
         ``context`` is a dictionary with additional context information.
 
         """
-        sexp = strip_broken_function_quotes(sexp)
+        sexp = process_backquotes(strip_broken_function_quotes(sexp))
         function_name = sexp[0]
         args = sexp[1:]
         function = self.functions.get(function_name.value())
