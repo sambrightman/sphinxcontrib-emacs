@@ -1,5 +1,5 @@
-master (in development)
-=======================
+0.2.1 (Aug 8, 2014)
+===================
 
 - Handle backquotes
 
