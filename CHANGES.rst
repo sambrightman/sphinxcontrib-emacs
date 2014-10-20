@@ -1,6 +1,8 @@
 master (in development)
 =======================
 
+- Prevent installation on Python 3 [GH-16]
+
 0.2.1 (Aug 8, 2014)
 ===================
 
