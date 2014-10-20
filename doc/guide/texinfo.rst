@@ -112,7 +112,7 @@ entities within nodes, i.e. you can reference the
 :infonode:`(elisp)Rearrangement` node in the Emacs Lisp reference, but not the
 documentation of the nreverse_ function in this node.
 
-.. _nreverse: http://www.gnu.org/software/emacs/manual/html_node/elisp/Rearrangement.html#index-nreverse-353
+.. _nreverse: http://www.gnu.org/software/emacs/manual/html_node/elisp/Rearrangement.html#index-nreverse-354
 
 Special inline markup
 =====================
