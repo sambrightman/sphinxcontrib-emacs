@@ -30,6 +30,10 @@ import sys
 if sys.version_info[0] < 3:
     from codecs import open     # pylint: disable=W0622
 
+# Don't install on Python 3
+if sys.version_info[0] > 2:
+    print("This package does not support Python 3.")
+    sys.exit(1)
 
 from setuptools import setup, find_packages
 
