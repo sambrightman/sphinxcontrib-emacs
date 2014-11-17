@@ -1,5 +1,5 @@
-master (in development)
-=======================
+0.3 (Nov 17, 2014)
+==================
 
 - Prevent installation on Python 3 [GH-16]
 - Add new `constant` directive for constants
