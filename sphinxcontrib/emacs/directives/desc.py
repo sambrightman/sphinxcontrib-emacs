@@ -314,6 +314,10 @@ class EmacsLispVariable(EmacsLispSymbol):
             symbol = self.lookup_auto_symbol()
             return symbol and symbol.properties.get('risky-local-variable')
 
+    @property
+    def is_constant_variable(self):
+        return self.name == 'el:constant'
+
     def get_safe_variable_predicate(self):
         """Get the predicate marking the documented variable as safe.
 
@@ -392,9 +396,12 @@ class EmacsLispVariable(EmacsLispSymbol):
         result_nodes = EmacsLispSymbol.run(self)
         cont_node = result_nodes[-1][-1]
 
-        properties = self.make_variable_properties()
-        if properties:
-            cont_node.insert(0, properties)
+        # Don't print variable properties for constants.  They are not supposed
+        # to change anyway.
+        if not self.is_constant_variable:
+            properties = self.make_variable_properties()
+            if properties:
+                cont_node.insert(0, properties)
 
         self.add_auto_version_changed(cont_node)
 

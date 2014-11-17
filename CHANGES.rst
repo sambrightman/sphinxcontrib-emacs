@@ -2,6 +2,8 @@ master (in development)
 =======================
 
 - Prevent installation on Python 3 [GH-16]
+- Add new `constant` directive for constants
+- Add support for `defconst` in autodoc
 
 0.2.1 (Aug 8, 2014)
 ===================

@@ -204,14 +204,15 @@ In the above example, we presume that :kbd:`C-c g` is the most important
 variant, so we add ``:noindex:`` to all others.  The index entry and
 cross-references with thus point to the :kbd:`C-c g` variant.
 
-Documenting variables, user options and hooks
-=============================================
+Documenting constants, variables, user options and hooks
+========================================================
 
-.. directive:: .. el:variable:: symbol
+.. directive:: .. el:constant:: symbol
+               .. el:variable:: symbol
                .. el:option:: symbol
                .. el:hook:: symbol
 
-   Document ``symbol`` as Emacs Lisp variable, for example:
+   Document ``symbol`` as (constant) Emacs Lisp variable, for example:
 
    .. code-block:: cl
 

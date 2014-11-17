@@ -318,6 +318,10 @@ class AbstractInterpreter(object):
             symbol.properties.update(lisputil.parse_custom_keywords(rest))
         if function.endswith('-local'):
             symbol.properties['buffer-local'] = True
+        elif function == 'defconst':
+            symbol.properties['constant-variable'] = True
+            # Constants are always risky for Emacs
+            symbol.properties['risky-local-variable'] = True
 
     def defface(self, context, _function, name, _face_def, docstring, *rest):
         """A call to ``defface``.
@@ -350,6 +354,7 @@ class AbstractInterpreter(object):
         'defvar': defvar,
         'defcustom': defvar,
         'defvar-local': defvar,
+        'defconst': defvar,
         'defface': defface,
         'eval-and-compile': eval_inner,
         'eval-when-compile': eval_inner,
