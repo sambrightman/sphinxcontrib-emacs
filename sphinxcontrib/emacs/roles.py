@@ -62,7 +62,7 @@ class EmacsLispSlotXRefRole(XRefRole):
         # reconstruct the function name
         if len(parts) > 1:
             struct, slot = parts
-            target = parts.join('-')
+            target = '-'.join(parts)
             # If the first character is a tilde, or if there is a current
             # structure, omit the structure name
             if not has_explicit_title and (omit_struct or
