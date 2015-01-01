@@ -41,7 +41,7 @@ source_suffix = '.rst'
 master_doc = 'index'
 
 project = u'sphinxcontrib-emacs'
-copyright = u'2014, Sebastian Wiesner'
+copyright = u'2014–2015 Sebastian Wiesner'
 
 version = '.'.join(__version__.split('.')[:2])
 release = __version__
