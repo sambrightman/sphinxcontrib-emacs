@@ -13,3 +13,4 @@
 
 # Tox cache and environments
 /.tox/
+/.cache/
