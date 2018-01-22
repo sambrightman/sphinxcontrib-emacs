@@ -1,6 +1,11 @@
 master (in development)
 =======================
 
+0.4 (Jan 22, 2018)
+==================
+
+- Updates for more recent Sphinx versions
+
 0.3.1 (Dec 20, 2014)
 ====================
 

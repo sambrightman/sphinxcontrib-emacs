@@ -62,15 +62,15 @@ class TestHTMLXRefDB(object):
 
     @pytest.mark.parametrize('manual,node,url', [
         ('cl', 'Structures',
-         'http://www.gnu.org/software/emacs/manual/html_node/cl/Structures.html#Structures'),
+         'https://www.gnu.org/software/emacs/manual/html_node/cl/Structures.html#Structures'),
         ('elisp', 'Library Search',
-         'http://www.gnu.org/software/emacs/manual/html_node/elisp/Library-Search.html#Library-Search'),
+         'https://www.gnu.org/software/emacs/manual/html_node/elisp/Library-Search.html#Library-Search'),
         ('elisp', 'Multi-file Packages',
-         'http://www.gnu.org/software/emacs/manual/html_node/elisp/Multi_002dfile-Packages.html#Multi_002dfile-Packages'),
+         'https://www.gnu.org/software/emacs/manual/html_node/elisp/Multi_002dfile-Packages.html#Multi_002dfile-Packages'),
         ('elisp', '%-Constructs',
-         'http://www.gnu.org/software/emacs/manual/html_node/elisp/_0025_002dConstructs.html#g_t_0025_002dConstructs'),
+         'https://www.gnu.org/software/emacs/manual/html_node/elisp/_0025_002dConstructs.html#g_t_0025_002dConstructs'),
         ('elisp', 'Top',
-         'http://www.gnu.org/software/emacs/manual/html_node/elisp/index.html#Top')
+         'https://www.gnu.org/software/emacs/manual/html_node/elisp/index.html#Top')
     ])
     def test_resolve(self, xrefdb, manual, node, url):
         assert xrefdb.resolve(manual, node) == url

@@ -34,7 +34,7 @@ from sphinxcontrib.emacs.nodes import infonode_reference
 
 
 #: URL of the htmlxref database of GNU Texinfo
-HTMLXREF_URL = 'http://ftp.hawo.stw.uni-erlangen.de/gnu/texinfo/htmlxref.cnf'
+HTMLXREF_URL = 'https://ftp.gnu.org/gnu/texinfo/htmlxref.cnf'
 
 #: Regular expression object to parse the contents of an Info reference role.
 INFO_RE = re.compile(r'\A\((?P<manual>[^)]+)\)(?P<node>.+)\Z')

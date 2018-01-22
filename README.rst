@@ -4,11 +4,11 @@
 
 .. default-role:: code
 
-.. |travis| image:: https://travis-ci.org/flycheck/sphinxcontrib-emacs.svg?branch=master
-            :target: https://travis-ci.org/flycheck/sphinxcontrib-emacs
+.. |travis| image:: https://travis-ci.org/sambrightman/sphinxcontrib-emacs.svg?branch=master
+            :target: https://travis-ci.org/sambrightman/sphinxcontrib-emacs
 
 .. |license| image:: https://img.shields.io/badge/license-MIT-green.svg?dummy
-             :target: https://github.com/flycheck/sphinxcontrib-emacs/blob/master/LICENSE
+             :target: https://github.com/sambrightman/sphinxcontrib-emacs/blob/master/LICENSE
 
 |license| |travis|
 
@@ -47,7 +47,7 @@ Support
 - `Issue tracker`_
 
 .. _User guide: http://sphinxcontrib-emacs.readthedocs.org/en/latest/#user-guide
-.. _Issue tracker: https://github.com/flycheck/sphinxcontrib-emacs/issues
+.. _Issue tracker: https://github.com/sambrightman/sphinxcontrib-emacs/issues
 
 Contribute
 ==========
@@ -55,8 +55,8 @@ Contribute
 - Github_
 - `Contribution guidelines`_
 
-.. _Github: https://github.com/flycheck/sphinxcontrib-emacs
-.. _Contribution guidelines: https://github.com/flycheck/sphinxcontrib-emacs/blob/master/CONTRIBUTING.rst
+.. _Github: https://github.com/sambrightman/sphinxcontrib-emacs
+.. _Contribution guidelines: https://github.com/sambrightman/sphinxcontrib-emacs/blob/master/CONTRIBUTING.rst
 
 License
 =======

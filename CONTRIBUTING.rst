@@ -103,7 +103,7 @@ Pull requests
 - Open a `pull request`_ that relates to but one subject with a clear title and
   description in grammatically correct, complete sentences.
 
-.. _issue tracker: https://github.com/flycheck/sphinxcontrib-emacs/issues
+.. _issue tracker: https://github.com/sambrightman/sphinxcontrib-emacs/issues
 .. _Tim Pope's guidelines: http://tbaggery.com/2008/04/19/a-note-about-git-commit-messages.html
 .. _Git Commit Mode: https://github.com/magit/git-modes/
 .. _Magit: https://github.com/magit/magit/

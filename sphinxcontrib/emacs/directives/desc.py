@@ -25,7 +25,7 @@
 
 from docutils import nodes as corenodes
 from docutils.parsers.rst import directives
-from sphinx import addnodes
+from sphinx import addnodes, version_info
 from sphinx.directives import ObjectDescription
 from sphinx.util.nodes import set_source_info, set_role_source_info
 
@@ -48,6 +48,13 @@ class EmacsLispSymbol(ObjectDescription):
     VERSION_CHANGE_LABEL = (
         'This {objtype} was introduced, or its default value was changed, in '
         'version {version} of the {package} package.')
+
+    @staticmethod
+    def _make_indexnode(indextext, targetname):
+        if version_info < (1, 4):
+            return ('pair', indextext, targetname, '')
+        else:
+            return ('pair', indextext, targetname, '', None)
 
     @property
     def object_type(self):
@@ -134,7 +141,7 @@ class EmacsLispSymbol(ObjectDescription):
                                                     self.objtype)
 
         indextext = '{0}; Emacs Lisp {1}'.format(name, self.object_type.lname)
-        self.indexnode['entries'].append(('pair', indextext, targetname, ''))
+        self.indexnode['entries'].append(self._make_indexnode(indextext, targetname))
 
     def lookup_auto_symbol(self, name=None):
         """Get the symbol with ``name`` for auto-documentation.
