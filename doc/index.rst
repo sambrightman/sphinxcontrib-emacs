@@ -43,8 +43,8 @@ issues`_ and opening pull requests.
 
    contributing
 
-.. _Github: https://github.com/flycheck/sphinxcontrib-emacs
-.. _reporting issues: https://github.com/flycheck/sphinxcontrib-emacs/issues
+.. _Github: https://github.com/sambrightman/sphinxcontrib-emacs
+.. _reporting issues: https://github.com/sambrightman/sphinxcontrib-emacs/issues
 
 License
 =======

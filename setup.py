@@ -62,7 +62,7 @@ def read_version_number(filename):
 setup(
     name='sphinxcontrib-emacs',
     version=read_version_number(VERSION_FILE),
-    url='https://github.com/flycheck/sphinxcontrib-emacs',
+    url='https://github.com/sambrightman/sphinxcontrib-emacs',
     license='MIT License',
     author='Sebastian Wiesner',
     author_email='swiesner@lunaryorn.com',

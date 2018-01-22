@@ -109,10 +109,10 @@ these special references.
 
 The downside is that you can only reference nodes in other manuals, but no
 entities within nodes, i.e. you can reference the
-:infonode:`(elisp)Rearrangement` node in the Emacs Lisp reference, but not the
+:infonode:`(elisp)Sequence Functions` node in the Emacs Lisp reference, but not the
 documentation of the nreverse_ function in this node.
 
-.. _nreverse: http://www.gnu.org/software/emacs/manual/html_node/elisp/Rearrangement.html#index-nreverse-354
+.. _nreverse: http://www.gnu.org/software/emacs/manual/html_node/elisp/Sequence-Functions.html#index-nreverse-433
 
 Special inline markup
 =====================
