@@ -4,13 +4,16 @@
 
 .. default-role:: code
 
+.. |pypi| image:: https://img.shields.io/pypi/v/sphinxcontrib-emacs.svg
+          :target: https://pypi.python.org/pypi/sphinxcontrib-emacs
+    
 .. |travis| image:: https://travis-ci.org/sambrightman/sphinxcontrib-emacs.svg?branch=master
             :target: https://travis-ci.org/sambrightman/sphinxcontrib-emacs
 
 .. |license| image:: https://img.shields.io/badge/license-MIT-green.svg?dummy
              :target: https://github.com/sambrightman/sphinxcontrib-emacs/blob/master/LICENSE
 
-|license| |travis|
+|pypi| |license| |travis|
 
 
 http://sphinxcontrib-emacs.readthedocs.org/
